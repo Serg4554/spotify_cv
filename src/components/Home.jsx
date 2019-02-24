@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { push } from "connected-react-router";
 import credentials from "../config/credentials.json"
 
-import Button from "./common/button"
 import "../styles/components/home.css"
+import Button from "./common/button"
 
 const mapStateToProps = state => {
   return {
@@ -59,7 +59,7 @@ class Home extends React.Component {
             <div id="clarification" className="text-size-small">(Well... officially Sergio)</div>
           </h1>
 
-          <img className="image" src="/images/img_1.png" alt="This is me"/>
+          <img id="me" src="/images/img_1.png" alt="This is me"/>
           <div id="premiumRequired">
             You need <span className="highlight-color">Spotify Premium</span> to enjoy the experience
             <img id="arrow" src="/assets/arrow.svg" alt="arrow" />

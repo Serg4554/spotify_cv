@@ -5,6 +5,7 @@ import { push } from "connected-react-router";
 import queryString from 'query-string';
 import * as SessionOperations from '../state/ducks/session/operations'
 
+import "../styles/components/welcome.css"
 import Modal from './common/modal'
 import Button from './common/button';
 
@@ -43,7 +44,13 @@ class Welcome extends React.Component {
     } else {
       return (
         <div>
-
+          <div id="infoContainer">
+            <img id="me" src="/images/img_2.png" alt="Me" />
+            <div id="infoText">
+              <p>I want to build <span className="highlight-color">the impossible</span> together with badass people that <span className="highlight-color">already do it</span></p>
+              <p>So I want to help you build <span className="highlight-color">Spotify</span> coding all day long</p>
+            </div>
+          </div>
         </div>
       );
     }
