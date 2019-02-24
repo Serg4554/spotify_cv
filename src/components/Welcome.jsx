@@ -34,26 +34,44 @@ class Welcome extends React.Component {
   }
 
   render() {
-    if(!this.props.token) {
-      return (
-        <Modal open={true} onClose={() => this.props.goToUrl('')} style={{maxWidth: "500px", textAlign: "center"}}>
-          <p style={{marginTop: "0"}}>An error has occurred during the authentication process, please return to home and try again by clicking on the login button.</p>
+    return (
+      <div id="welcome">
+        <Modal
+          open={!this.props.token}
+          onClose={() => this.props.goToUrl('')}
+          style={{maxWidth: '500px', textAlign: 'center'}}
+        >
+          <p style={{margin: '0 0 30px 0'}}>An error has occurred during the
+            authentication process, please return to home and try again by
+            clicking on the login button.</p>
           <Button onClick={() => this.props.goToUrl('')}>Return home</Button>
         </Modal>
-      );
-    } else {
-      return (
-        <div>
-          <div id="infoContainer">
-            <img id="me" src="/images/img_2.png" alt="Me" />
-            <div id="infoText">
-              <p>I want to build <span className="highlight-color">the impossible</span> together with badass people that <span className="highlight-color">already do it</span></p>
-              <p>So I want to help you build <span className="highlight-color">Spotify</span> coding all day long</p>
-            </div>
+
+        <div id="infoContainer">
+          <div ref={obj => this.img = obj} id="img" />
+          <div id="imgText">
+            <p id="p1">
+              I want to build <span className="highlight-color">the impossible</span> together
+              with badass people that <span className="highlight-color">already do it</span>
+            </p>
+            <p id="p2">So I want to help you build <span className="highlight-color">Spotify</span> coding all day long</p>
+          </div>
+
+          <div id="motivation">
+            “I don't want to be one more mercenary that makes software by
+            requests, without caring. I want to devote my passion to pampering a
+            project up to <span style={{color: 'white'}}>perfection</span>”
+          </div>
+
+          <div id="adventure">
+            <div id="play"/>
+            <p style={{margin: '0'}}>For now, let's start the first <span
+              style={{textDecoration: 'line-through'}}>adventure</span> <span
+              id="song">song!!</span></p>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 
