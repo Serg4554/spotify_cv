@@ -2,11 +2,6 @@ import * as actions from "./actions"
 import apiService from "../../apiService";
 import crypto from 'crypto';
 
-const setUuid = (uuid) => dispatch => {
-  window.localStorage.setItem('uuid', uuid);
-  dispatch(actions.setUuid(uuid));
-};
-
 const setToken = (token) => dispatch => {
   window.localStorage.setItem('jwt', token);
   apiService.setToken(token);
@@ -22,16 +17,15 @@ const retrieveSession = () => dispatch => {
 
   const uuid = window.localStorage.getItem('uuid');
   if(!uuid) {
-    crypto.randomBytes(48, (err, buffer) => {
-      dispatch(actions.setUuid(buffer.toString('hex')));
-    });
+    const uuid = crypto.randomBytes(48).toString('hex');
+    window.localStorage.setItem('uuid', uuid);
+    dispatch(actions.setUuid(uuid));
   } else {
     dispatch(actions.setUuid(uuid));
   }
 };
 
 export {
-  setUuid,
   setToken,
   retrieveSession,
 }

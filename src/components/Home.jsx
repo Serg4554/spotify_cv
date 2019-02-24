@@ -20,21 +20,30 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.timeouts = [];
+  }
+  componentWillUnmount() {
+    this.timeouts.forEach(timeout => {
+      clearTimeout(timeout);
+    });
+  }
+
   componentDidMount() {
-    console.log(document.cookie);
-    setTimeout(() => {
-      this.welcomeMsg.className += ' animate';
-    }, 500);
-    setTimeout(() => {
-      this.welcomeMsg.className += ' hv-center-hidden';
-    }, 1500);
-    setTimeout(() => {
-      this.welcomeMsg.className += ' no-display';
-      this.content.className = this.content.className.replace(' no-display', '');
-    }, 2500);
-    setTimeout(() => {
-      this.content.className = this.content.className.replace(' transparent', '');
-    }, 2600);
+    this.timeouts.push(setTimeout(() => {
+      this.welcomeMsg.classList.add("animate");
+    }, 500));
+    this.timeouts.push(setTimeout(() => {
+      this.welcomeMsg.classList.add("hv-center-hidden");
+    }, 1500));
+    this.timeouts.push(setTimeout(() => {
+      this.welcomeMsg.classList.add("no-display");
+    }, 2500));
+    this.timeouts.push(setTimeout(() => {
+      this.content.classList.remove("transparent");
+    }, 2600));
   }
 
   render() {
@@ -44,7 +53,7 @@ class Home extends React.Component {
           <h1  className="hv-center text-size-huge">This is me</h1>
         </div>
 
-        <div ref={obj => this.content = obj} className="text-center animate no-display transparent">
+        <div ref={obj => this.content = obj} className="text-center animate transparent">
           <h1 id="helloMsg" className="text-size-huge">
             <div>Hello <span className="highlight-color">Spotify</span>, I'm Serg</div>
             <div id="clarification" className="text-size-small">(Well... officially Sergio)</div>
@@ -53,11 +62,12 @@ class Home extends React.Component {
           <img className="image" src="/images/img_1.png" alt="This is me"/>
           <div id="premiumRequired">
             You need <span className="highlight-color">Spotify Premium</span> to enjoy the experience
-            <object id="arrow" data="/assets/arrow.svg" type="image/svg+xml" />
+            <img id="arrow" src="/assets/arrow.svg" alt="arrow" />
           </div>
 
           <Button
             id="login"
+            size="large"
             onClick={() => {
               window.location.href = "https://accounts.spotify.com/authorize" +
                 "?client_id=" + credentials.clientId +
@@ -69,7 +79,7 @@ class Home extends React.Component {
             Login to continue
           </Button>
           <div id="tip" className="text-size-small">Tip: Turn up the volume or improve your
-            extrasensory powers 😉
+            extrasensory powers <span role="img" aria-label="wink">😉</span>
           </div>
         </div>
       </div>
