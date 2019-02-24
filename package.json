@@ -1,0 +1,34 @@
+{
+  "name": "spotify-cv",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "connected-react-router": "^4.3.0",
+    "crypto": "^1.0.1",
+    "history": "^4.7.2",
+    "prop-types": "^15.6.2",
+    "query-string": "^6.2.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.5",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "superagent": "^3.8.3",
+    "superagent-promise": "^1.1.0"
+  },
+  "scripts": {
+    "start": "PORT=3000 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {},
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
