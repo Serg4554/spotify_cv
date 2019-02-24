@@ -40,6 +40,7 @@ class Home extends React.Component {
     }, 1500));
     this.timeouts.push(setTimeout(() => {
       this.welcomeMsg.classList.add("no-display");
+      this.content.classList.remove("no-display");
     }, 2500));
     this.timeouts.push(setTimeout(() => {
       this.content.classList.remove("transparent");
@@ -53,7 +54,7 @@ class Home extends React.Component {
           <h1  className="hv-center text-size-huge">This is me</h1>
         </div>
 
-        <div ref={obj => this.content = obj} className="text-center animate transparent">
+        <div ref={obj => this.content = obj} className="text-center animate no-display transparent">
           <h1 id="helloMsg" className="text-size-huge">
             <div>Hello <span className="highlight-color">Spotify</span>, I'm Serg</div>
             <div id="clarification" className="text-size-small">(Well... officially Sergio)</div>
