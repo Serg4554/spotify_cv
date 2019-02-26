@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import './button.css';
+import style from './button.module.css';
 
 const Button = (props) => (
   <div {...props}>
-    <div className={"button " + props.size}>{props.children}</div>
+    <div
+      className={[style.button, style[props.size]].join(' ')}>
+      {props.children}
+    </div>
   </div>
 );
 
