@@ -1,0 +1,105 @@
+.figure {
+    position: relative;
+    width: 207px;
+    height: 310px;
+}
+.poleBase {
+    position: absolute;
+    background: white;
+    width: 100px;
+    height: 10px;
+    top: 300px;
+    left: 107px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.pole {
+    position: absolute;
+    background: white;
+    width: 10px;
+    height: 300px;
+    top: 0;
+    left: 152px;
+}
+.poleTop {
+    position: absolute;
+    background: white;
+    width: 150px;
+    height: 10px;
+    top: 0;
+    left: 12px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.figure {
+    transition: opacity .1s;
+}
+.string {
+    position: absolute;
+    background: white;
+    width: 2px;
+    height: 50px;
+    top: 0;
+    left: 37px;
+}
+.head {
+    position: absolute;
+    border: 5px solid white;
+    width: 40px;
+    height: 40px;
+    top: 50px;
+    left: 12px;
+    border-radius: 25px;
+}
+.body {
+    position: absolute;
+    background: white;
+    width: 5px;
+    height: 80px;
+    top: 100px;
+    left: 35px;
+}
+.leftArm {
+    position: absolute;
+    background: white;
+    width: 5px;
+    height: 50px;
+    top: 100px;
+    left: 17px;
+    transform: rotate(45deg);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.rightArm {
+    position: absolute;
+    background: white;
+    width: 5px;
+    height: 50px;
+    top: 100px;
+    left: 53px;
+    transform: rotate(-45deg);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.leftLeg {
+    position: absolute;
+    background: white;
+    width: 5px;
+    height: 80px;
+    top: 175px;
+    left: 25px;
+    transform: rotate(15deg);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.rightLeg {
+    position: absolute;
+    background: white;
+    width: 5px;
+    height: 80px;
+    top: 175px;
+    left: 45px;
+    transform: rotate(-15deg);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
