@@ -1,0 +1,153 @@
+.container {
+    min-width: 1000px;
+    padding: 20px;
+    position: relative;
+}
+.highlight-color {
+    color: #1cd156;
+}
+
+
+/* Text config */
+.text-size-huge {
+    font-size: 70pt;
+}
+.text-size-small {
+    font-size: 13pt;
+    font-weight: 200;
+}
+.text-center {
+    text-align: center;
+}
+
+
+/* Common */
+.no-display {
+    display: none;
+}
+.transparent {
+    opacity: 0;
+}
+
+
+/* Styles for: Home.jsx */
+.hv-center {
+    text-align: center;
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.animateHome {
+    transition: opacity 1s, transform 1s;
+}
+.animateHome.hv-center-hidden{
+    transform: translateY(-200px);
+    opacity: 0;
+}
+#welcomeMsg {
+    width: 100%;
+    height: calc(100vh - 40px);
+    position: relative;
+}
+#helloMsg {
+    width: 970px;
+    margin: 0 auto;
+}
+#clarification {
+    font-family: 'Handlee', cursive;
+    text-align: right;
+}
+#me {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    margin: 30px;
+}
+#login {
+    margin-top: 10px;
+}
+#premiumRequired {
+    position: absolute;
+    margin-top: -30px;
+    left: calc(50% + 150px);
+    width: 200px;
+}
+#premiumRequired #arrow {
+    width: 50px;
+    transform: rotate(190deg) translateX(70px) translateY(-10px);
+}
+#tip {
+    margin-top: 20px;
+}
+
+
+/* Styles for: Welcome.jsx */
+#welcomePage {
+    font-size: 35px;
+}
+#welcomeInfoContainer {
+    width: 1000px;
+    margin: 0 auto;
+}
+#welcomeImg {
+    display: inline-block;
+    vertical-align: middle;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    margin-right: 32px;
+    background-image: url("/images/img_2.png");
+    background-size: 800px 400px;
+    border: 1px solid white;
+}
+#welcomeImg:hover {
+    background-position: -400px;
+}
+#welcomeInfoContainer #imgText {
+    display: inline-block;
+    vertical-align: middle;
+    width: 500px;
+}
+#welcomeInfoContainer #imgText #p1 {
+    margin: 0 0 70px;
+}
+#welcomeInfoContainer #imgText #p2 {
+    margin: 70px 0 0;
+}
+#welcomeInfoContainer #motivation {
+    text-align: center;
+    color: #ccc;
+    margin: 100px 0;
+}
+#adventure {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+#adventure #play {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #1ed760;
+    background-image: url("/assets/play.svg");
+    background-repeat: no-repeat;
+    background-position: 55px 25px;
+    background-size: 50px 100px;
+    border-radius: 75px;
+    transition: transform .2s, background-color .2s;
+    cursor: pointer;
+}
+#adventure #play:hover {
+    transform: scale(1.02);
+    background-color: rgba(30, 215, 96, 0.1);
+}
+#adventure #song {
+    font-family: 'Handlee', cursive;
+    text-align: right;
+    position: absolute;
+    margin: 20px 0 0 -25px;
+    transform: rotate(-10deg);
+}

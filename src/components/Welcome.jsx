@@ -5,7 +5,6 @@ import { push } from "connected-react-router";
 import queryString from 'query-string';
 import * as SessionOperations from '../state/ducks/session/operations'
 
-import "../styles/components/welcome.css"
 import Modal from './common/modal'
 import Button from './common/button';
 
@@ -35,7 +34,7 @@ class Welcome extends React.Component {
 
   render() {
     return (
-      <div id="welcome">
+      <div id="welcomePage">
         <Modal
           open={!this.props.token}
           onClose={() => this.props.goToUrl('')}
@@ -47,8 +46,8 @@ class Welcome extends React.Component {
           <Button onClick={() => this.props.goToUrl('')}>Return home</Button>
         </Modal>
 
-        <div id="infoContainer">
-          <div ref={obj => this.img = obj} id="img" />
+        <div id="welcomeInfoContainer">
+          <div id="welcomeImg" />
           <div id="imgText">
             <p id="p1">
               I want to build <span className="highlight-color">the impossible</span> together
@@ -64,7 +63,7 @@ class Welcome extends React.Component {
           </div>
 
           <div id="adventure">
-            <div id="play"/>
+            <div onClick={() => this.props.goToUrl("/hangman")} id="play"/>
             <p style={{margin: '0'}}>For now, let's start the first <span
               style={{textDecoration: 'line-through'}}>adventure</span> <span
               id="song">song!!</span></p>

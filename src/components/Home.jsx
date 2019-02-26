@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { push } from "connected-react-router";
 import credentials from "../config/credentials.json"
 
-import "../styles/components/home.css"
 import Button from "./common/button"
 
 const mapStateToProps = state => {
@@ -33,7 +32,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.timeouts.push(setTimeout(() => {
-      this.welcomeMsg.classList.add("animate");
+      this.welcomeMsg.classList.add("animateHome");
     }, 500));
     this.timeouts.push(setTimeout(() => {
       this.welcomeMsg.classList.add("hv-center-hidden");
@@ -54,7 +53,7 @@ class Home extends React.Component {
           <h1  className="hv-center text-size-huge">This is me</h1>
         </div>
 
-        <div ref={obj => this.content = obj} className="text-center animate no-display transparent">
+        <div ref={obj => this.content = obj} className="text-center animateHome no-display transparent">
           <h1 id="helloMsg" className="text-size-huge">
             <div>Hello <span className="highlight-color">Spotify</span>, I'm Serg</div>
             <div id="clarification" className="text-size-small">(Well... officially Sergio)</div>
