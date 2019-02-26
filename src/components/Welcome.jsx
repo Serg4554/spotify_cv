@@ -34,7 +34,7 @@ class Welcome extends React.Component {
 
   render() {
     return (
-      <div id="welcomePage">
+      <div className="mainContainer">
         <Modal
           open={!this.props.token}
           onClose={() => this.props.goToUrl('')}

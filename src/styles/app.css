@@ -6,6 +6,9 @@
 .highlight-color {
     color: #1cd156;
 }
+.mainContainer {
+    font-size: 35px;
+}
 
 
 /* Text config */
@@ -85,9 +88,6 @@
 
 
 /* Styles for: Welcome.jsx */
-#welcomePage {
-    font-size: 35px;
-}
 #welcomeInfoContainer {
     width: 1000px;
     margin: 0 auto;
