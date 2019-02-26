@@ -7,6 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import '../styles/app.css';
 import Home from './Home'
 import Welcome from './Welcome'
+import Hangman from './Hangman'
 
 
 const mapStateToProps = state => ({
@@ -28,6 +29,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/welcome" component={Welcome} />
+          <Route exact path="/hangman" component={Hangman} />
         </Switch>
       </div>
     );
