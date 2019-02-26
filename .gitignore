@@ -113,11 +113,6 @@ typings/
 # testing
 /coverage
 
-# production
-/build
-src/**/*.css
-src/**/*.css.map
-
 # misc
 .env.local
 .env.development.local
