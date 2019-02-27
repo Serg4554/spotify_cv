@@ -21,7 +21,12 @@ const play = (uri) => () => {
   SpotifyService.play(uri);
 };
 
+const pause = () => () => {
+  SpotifyService.pause();
+};
+
 export {
   load,
-  play
+  play,
+  pause
 }

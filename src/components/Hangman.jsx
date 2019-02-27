@@ -14,6 +14,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
+  pause: SpotifyOperations.pause,
   goToUrl: url => {
     return push(url)
   }
@@ -30,6 +31,10 @@ class Hangman extends React.Component {
 
   componentWillMount() {
     this.props.play("spotify:track:0ct6r3EGTcMLPtrXHDvVjc");
+  }
+
+  componentWillUnmount() {
+    this.props.pause();
   }
 
   render() {
