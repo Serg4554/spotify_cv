@@ -1,4 +1,5 @@
 import * as actions from "./actions"
+import * as SpotifyOperations from "../spotify/operations"
 import SpotifyService from "../../SpotifyService";
 import crypto from 'crypto';
 
@@ -11,8 +12,9 @@ const setToken = (token) => dispatch => {
 const retrieveSession = () => dispatch => {
   const token = window.localStorage.getItem('jwt');
   if(token) {
-    SpotifyService.setToken(token);
     dispatch(actions.setToken(token));
+    SpotifyService.setToken(token);
+    SpotifyOperations.load();
   }
 
   const uuid = window.localStorage.getItem('uuid');

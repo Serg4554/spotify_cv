@@ -3,98 +3,102 @@ import SpotifyWebApi from 'spotify-web-api-js';
 
 const Spotify = new SpotifyWebApi();
 
+let device = '';
 let ready = false;
-let webPlayerReady = false;
-let device_id = '';
-let readyListeners = [];
+let waitingToPlay = '';
 let statusListeners = [];
-let authenticationErrorListeners = [];
-
-window.onSpotifyWebPlaybackSDKReady = () => {
-  webPlayerReady = true;
-  load();
-};
 
 const setToken = token => {
   Spotify.setAccessToken(token);
-  load();
 };
 
-const getToken = () => {
-  return Spotify.getAccessToken();
-};
-
-function load() {
-  if (Spotify.getAccessToken() && webPlayerReady) {
-    const player = new window.Spotify.Player({
-      name: credentials.playerName,
-      getOAuthToken: cb => cb(Spotify.getAccessToken()),
-    });
-
-    // Errors
-    player.addListener('initialization_error', ({message}) => {
-      console.error(message);
-    });
-    player.addListener('authentication_error', ({message}) => {
-      console.error(message);
-      if(message === "Authentication failed") {
-        authenticationErrorListeners.forEach(cb => cb());
+const load = () => {
+  return new Promise((resolve, reject) => {
+    function loadWebPlayer() {
+      if(!Spotify.getAccessToken()) {
+        return reject("No token provided");
       }
-    });
-    player.addListener('account_error', ({message}) => {
-      console.error('account_error', message);
-    });
-    player.addListener('playback_error', ({message}) => {
-      console.error('playback_error', message);
-    });
 
-    // Status
-    player.addListener('player_state_changed', state => {
-      statusListeners.forEach(cb => cb(state));
-    });
+      const player = new window.Spotify.Player({
+        name: credentials.playerName,
+        getOAuthToken: cb => cb(Spotify.getAccessToken()),
+      });
 
-    // Ready
-    player.addListener('ready', (player) => {
-      device_id = player.device_id;
-      ready = true;
-      readyListeners.forEach(cb => cb(ready));
-    });
+      player.addListener('initialization_error', () => {
+        reject("Initialization failed"); // Unsupported browser
+      });
 
-    // Not ready
-    player.addListener('not_ready', () => {
-      device_id = '';
-      ready = false;
-      readyListeners.forEach(cb => cb(ready));
-    });
+      player.addListener('authentication_error', () => {
+        reject("Authentication failed"); // Invalid token
+      });
 
-    player.connect();
-  }
-}
+      player.addListener('account_error', () => {
+        reject("Account validation failed"); // No Spotify Premium
+      });
+
+      // Status changed
+      player.addListener('player_state_changed', state => {
+        statusListeners.forEach(cb => cb(state));
+      });
+
+      // Ready
+      player.addListener('ready', ({device_id}) => {
+        device = device_id;
+        ready = true;
+        resolve(ready);
+        if(waitingToPlay) {
+          play(waitingToPlay);
+          waitingToPlay = '';
+        }
+      });
+
+      // Not ready (usually no internet connection)
+      player.addListener('not_ready', ({device_id}) => {
+        device = device_id;
+        ready = false;
+        resolve(ready);
+      });
+
+      player.connect();
+    }
+
+    if(!window.Spotify) {
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        loadWebPlayer();
+      };
+    } else {
+      loadWebPlayer();
+    }
+  });
+};
 
 const isReady = () => {
   return ready;
-};
-
-const onReady = cb => {
-  readyListeners.push(cb);
 };
 
 const onStatus = cb => {
   statusListeners.push(cb);
 };
 
-const onAuthenticationError = cb => {
-  authenticationErrorListeners.push(cb);
+const play = (uri) => {
+  if(ready) {
+    Spotify.play({device_id: device, uris: [uri]});
+  } else {
+    waitingToPlay = uri;
+  }
 };
 
-const play = (uri) => Spotify.play({device_id, uris: [uri]});
+const pause = () => {
+  if(device) {
+    Spotify.pause({device_id: device});
+  }
+};
 
 export default {
   setToken,
-  getToken,
+  load,
   isReady,
-  onReady,
   onStatus,
-  onAuthenticationError,
   play,
+  pause,
 };

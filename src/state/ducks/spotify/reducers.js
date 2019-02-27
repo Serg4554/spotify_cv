@@ -3,14 +3,14 @@ import * as types from "./types";
 /** State shape
  * {
  *  loading: bool,
- *  error: bool
+ *  error: string
  *  ready: bool
  * }
  */
 
 const initState = {
   loading: false,
-  error: false,
+  error: "",
   ready: false
 };
 

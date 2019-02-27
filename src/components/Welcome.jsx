@@ -15,7 +15,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setToken: SessionOperations.setToken,
-  setLoading: SpotifyOperations.setLoading,
+  loadSpotify: SpotifyOperations.load,
   goToUrl: url => {
     return push(url)
   }
@@ -25,9 +25,9 @@ class Welcome extends React.Component {
   componentWillMount() {
     if(this.props.location.hash) {
       let payload = queryString.parse(this.props.location.hash);
-      if(payload.state === this.props.uuid) {
+      if(payload.state === this.props.uuid && this.props.token !== payload.access_token) {
         this.props.setToken(payload.access_token);
-        this.props.setLoading(true);
+        this.props.loadSpotify();
       }
     }
   }

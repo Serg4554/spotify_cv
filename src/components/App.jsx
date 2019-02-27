@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { retrieveSession } from "../state/ducks/session/operations"
 import * as SpotifyOperations from "../state/ducks/spotify/operations"
 import { Route, Switch } from "react-router-dom";
-import SpotifyService from '../state/SpotifyService';
 import {push} from "connected-react-router";
 
 import '../styles/app.css';
@@ -27,9 +26,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   retrieveSession,
-  setLoading: SpotifyOperations.setLoading,
-  setReady: SpotifyOperations.setReady,
-  setError: SpotifyOperations.setError,
+  loadSpotify: SpotifyOperations.load,
   goToUrl: url => {
     return push(url)
   }
@@ -38,23 +35,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 class App extends Component {
   componentWillMount() {
     this.props.retrieveSession();
-
-    if(SpotifyService.getToken()) {
-      this.props.setLoading(true);
-    }
-
-    SpotifyService.onReady((ready) => {
-      this.props.setLoading(false);
-      this.props.setReady(ready);
-    });
-    SpotifyService.onAuthenticationError(() => {
-      this.props.setLoading(false);
-      this.props.setError(true);
-    });
+    this.props.loadSpotify();
   }
 
   render() {
-    if(this.props.location !== "/" && this.props.error) {
+    if(this.props.location !== "/" && !!this.props.error) {
       setTimeout(() => {
         this.props.goToUrl('');
       }, 3000);
@@ -68,7 +53,7 @@ class App extends Component {
         </SnackBar>
 
         <Modal
-          open={this.props.location !== "/" && this.props.error}
+          open={this.props.location !== "/" && !!this.props.error}
           onClose={() => this.props.goToUrl('')}
           style={{maxWidth: '500px', textAlign: 'center'}}
         >

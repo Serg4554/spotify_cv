@@ -1,35 +1,27 @@
 import * as actions from "./actions"
 import SpotifyService from "../../SpotifyService";
 
-const setLoading = (loading) => dispatch => {
-  return dispatch(actions.setLoading(loading));
-};
-
-const setError = (error) => dispatch => {
-  return dispatch(actions.setError(error));
-};
-
-const setReady = (ready) => dispatch => {
-  return dispatch(actions.setReady(ready));
+const load = () => dispatch => {
+  SpotifyService.pause();
+  SpotifyService.load()
+    .then(ready => {
+      dispatch(actions.setLoading(false));
+      dispatch(actions.setReady(ready));
+      dispatch(actions.setError(""));
+    })
+    .catch(error => {
+      dispatch(actions.setLoading(false));
+      dispatch(actions.setReady(false));
+      dispatch(actions.setError(error));
+    });
+  dispatch(actions.setLoading(true));
 };
 
 const play = (uri) => () => {
-  return new Promise((resolve, reject) => {
-    if(!SpotifyService.isReady()) {
-      SpotifyService.onReady((ready) => {
-        SpotifyService.play(uri);
-        ready ? resolve() : reject();
-      })
-    } else {
-      SpotifyService.play(uri);
-      resolve();
-    }
-  });
+  SpotifyService.play(uri);
 };
 
 export {
-  setLoading,
-  setError,
-  setReady,
+  load,
   play
 }
