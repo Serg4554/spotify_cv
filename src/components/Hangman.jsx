@@ -2,19 +2,18 @@ import React from "react";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from "connected-react-router";
-import * as SessionOperations from '../state/ducks/session/operations'
+import * as SpotifyOperations from '../state/ducks/spotify/operations'
 
-import Button from './common/button';
 import HangmanFigure from './HangmanFigure';
 
 const mapStateToProps = state => {
   return {
-    token: state.session.token
+    ready: state.spotify.ready
   }
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setToken: SessionOperations.setToken,
+  play: SpotifyOperations.play,
   goToUrl: url => {
     return push(url)
   }
@@ -28,6 +27,11 @@ class Hangman extends React.Component {
       level: 0
     }
   }
+
+  componentWillMount() {
+    this.props.play("spotify:track:0ct6r3EGTcMLPtrXHDvVjc");
+  }
+
   render() {
     return (
       <div className="mainContainer">

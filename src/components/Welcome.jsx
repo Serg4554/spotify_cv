@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 import { push } from "connected-react-router";
 import queryString from 'query-string';
 import * as SessionOperations from '../state/ducks/session/operations'
-
-import Modal from './common/modal'
-import Button from './common/button';
+import * as SpotifyOperations from '../state/ducks/spotify/operations'
 
 const mapStateToProps = state => {
   return {
@@ -17,6 +15,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setToken: SessionOperations.setToken,
+  setLoading: SpotifyOperations.setLoading,
   goToUrl: url => {
     return push(url)
   }
@@ -28,6 +27,7 @@ class Welcome extends React.Component {
       let payload = queryString.parse(this.props.location.hash);
       if(payload.state === this.props.uuid) {
         this.props.setToken(payload.access_token);
+        this.props.setLoading(true);
       }
     }
   }
@@ -35,17 +35,6 @@ class Welcome extends React.Component {
   render() {
     return (
       <div className="mainContainer">
-        <Modal
-          open={!this.props.token}
-          onClose={() => this.props.goToUrl('')}
-          style={{maxWidth: '500px', textAlign: 'center'}}
-        >
-          <p style={{margin: '0 0 30px 0'}}>An error has occurred during the
-            authentication process, please return to home and try again by
-            clicking on the login button.</p>
-          <Button onClick={() => this.props.goToUrl('')}>Return home</Button>
-        </Modal>
-
         <div id="welcomeInfoContainer">
           <div id="welcomeImg" />
           <div id="imgText">

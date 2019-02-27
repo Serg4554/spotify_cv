@@ -10,14 +10,15 @@
     "query-string": "^6.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-loading": "^2.0.3",
+    "react-material-snackbar": "^3.0.1",
     "react-redux": "^5.0.7",
     "react-responsive-modal": "^3.6.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "superagent": "^3.8.3",
-    "superagent-promise": "^1.1.0"
+    "spotify-web-api-js": "^1.2.0"
   },
   "scripts": {
     "start": "PORT=3000 react-scripts start",

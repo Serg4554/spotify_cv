@@ -8,7 +8,10 @@ import Button from "./common/button"
 
 const mapStateToProps = state => {
   return {
-    uuid: state.session.uuid
+    uuid: state.session.uuid,
+    loading: state.spotify.loading,
+    ready: state.spotify.ready,
+    error: state.spotify.error,
   }
 };
 
@@ -47,6 +50,8 @@ class Home extends React.Component {
   }
 
   render() {
+    const {loading, ready, error} = this.props;
+
     return (
       <div>
         <div ref={obj => this.welcomeMsg = obj} id="welcomeMsg">
@@ -69,14 +74,19 @@ class Home extends React.Component {
             id="login"
             size="large"
             onClick={() => {
-              window.location.href = "https://accounts.spotify.com/authorize" +
-                "?client_id=" + credentials.clientId +
-                "&response_type=token" +
-                "&redirect_uri=" + encodeURI(credentials.url + "/welcome") +
-                "&state=" + this.props.uuid;
+              if(!loading && ready && !error) {
+                this.props.goToUrl("/welcome");
+              } else {
+                window.location.href = "https://accounts.spotify.com/authorize" +
+                  "?client_id=" + credentials.clientId +
+                  "&response_type=token" +
+                  "&redirect_uri=" + encodeURI(credentials.url + "/welcome") +
+                  "&state=" + this.props.uuid +
+                  "&scope=" + encodeURI("streaming user-read-birthdate user-read-email user-read-private");
+              }
             }}
           >
-            Login to continue
+            {!loading && ready && !error ? "Click" : "Login"} to continue
           </Button>
           <div id="tip" className="text-size-small">Tip: Turn up the volume or improve your
             extrasensory powers <span role="img" aria-label="wink">😉</span>

@@ -1,17 +1,17 @@
 import * as actions from "./actions"
-import apiService from "../../apiService";
+import SpotifyService from "../../SpotifyService";
 import crypto from 'crypto';
 
 const setToken = (token) => dispatch => {
   window.localStorage.setItem('jwt', token);
-  apiService.setToken(token);
+  SpotifyService.setToken(token);
   return dispatch(actions.setToken(token));
 };
 
 const retrieveSession = () => dispatch => {
   const token = window.localStorage.getItem('jwt');
   if(token) {
-    apiService.setToken(token);
+    SpotifyService.setToken(token);
     dispatch(actions.setToken(token));
   }
 
