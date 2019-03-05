@@ -36,7 +36,9 @@ class Welcome extends React.Component {
     return (
       <div className="mainContainer">
         <div id="welcomeInfoContainer">
-          <div id="welcomeImg" />
+          <div id="welcomeImg">
+            <figcaption>Hover me <span role="img" aria-label="wink">😏</span></figcaption>
+          </div>
           <div id="imgText">
             <p id="p1">
               I want to build <span className="highlight-color">the impossible</span> together
