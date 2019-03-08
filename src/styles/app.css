@@ -44,6 +44,15 @@
     opacity: 0;
 }
 
+.continueButtonContainer {
+    text-align: center;
+}
+
+.continueButton {
+    display: inline-block;
+    margin: 0 10px;
+}
+
 
 /* Styles for: Home.jsx */
 .hv-center {
@@ -238,4 +247,31 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: 100px;
+}
+
+.hangmanLetters {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.hangmanLetter {
+    width: 80px;
+    height: 100px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 5px solid white;
+    margin: 0 10px;
+    font-size: 80pt;
+    text-align: center;
+    color: white;
+}
+.hangmanLetter:focus {
+    border-bottom: 5px solid #1ed760;
+}
+#hangmanLettersCaption {
+    font-family: 'Handlee', cursive;
+    text-align: center;
+    font-size: 10pt;
+    margin: 10px 0 50px 0;
 }
