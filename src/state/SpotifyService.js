@@ -7,6 +7,7 @@ let device = '';
 let ready = false;
 let waitingToPlay = '';
 let stateListeners = [];
+let repeat = false;
 
 const setToken = token => {
   Spotify.setAccessToken(token);
@@ -52,7 +53,7 @@ const load = () => {
         ready = true;
         resolve(ready);
         if(waitingToPlay) {
-          play(waitingToPlay);
+          play(waitingToPlay, repeat);
           waitingToPlay = '';
         }
       });
@@ -85,9 +86,19 @@ const onStateChanged = cb => {
   stateListeners.push(cb);
 };
 
-const play = (uri) => {
+const play = (uri, _repeat) => {
+  repeat = _repeat;
   if(ready) {
-    Spotify.play({device_id: device, uris: [uri]});
+    Spotify.play({device_id: device, uris: [uri]})
+      .then(() => {
+        setTimeout(() => {
+          if(repeat) {
+            Spotify.setRepeat('track');
+          } else {
+            Spotify.setRepeat('off');
+          }
+        }, 1000);
+      });
   } else {
     waitingToPlay = uri;
   }

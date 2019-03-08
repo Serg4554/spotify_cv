@@ -24,8 +24,8 @@ const setText = (text) => dispatch => {
   dispatch(actions.setText(text));
 };
 
-const play = (uri) => () => {
-  SpotifyService.play(uri);
+const play = (uri, repeat) => () => {
+  SpotifyService.play(uri, repeat);
 };
 
 const pause = () => () => {
