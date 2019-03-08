@@ -1,0 +1,26 @@
+.player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: #282828;
+    border-top: 1px solid black;
+    color: white;
+}
+
+.text {
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+    font-size: 20pt;
+}
+
+.progress {
+    display: block;
+    margin: 0 auto;
+    width: calc(100% - 40px) !important;
+}
+
+.progressSymbol {
+    display: none !important;
+}

@@ -3,9 +3,18 @@
     padding: 20px;
     position: relative;
 }
+
+.playerContainer {
+    min-width: 1000px;
+    padding: 20px;
+    position: relative;
+    height: calc(100vh - 110px);
+}
+
 .highlight-color {
     color: #1cd156;
 }
+
 .mainContainer {
     font-size: 35px;
 }
@@ -15,10 +24,12 @@
 .text-size-huge {
     font-size: 70pt;
 }
+
 .text-size-small {
     font-size: 13pt;
     font-weight: 200;
 }
+
 .text-center {
     text-align: center;
 }
@@ -28,6 +39,7 @@
 .no-display {
     display: none;
 }
+
 .transparent {
     opacity: 0;
 }
@@ -43,45 +55,55 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
 .animateHome {
     transition: opacity 1s, transform 1s;
 }
-.animateHome.hv-center-hidden{
+
+.animateHome.hv-center-hidden {
     transform: translateY(-200px);
     opacity: 0;
 }
+
 #welcomeMsg {
     width: 100%;
     height: calc(100vh - 40px);
     position: relative;
 }
+
 #helloMsg {
     width: 970px;
     margin: 0 auto;
 }
+
 #clarification {
     font-family: 'Handlee', cursive;
     text-align: right;
 }
+
 #me {
     width: 400px;
     height: 400px;
     object-fit: cover;
     margin: 30px;
 }
+
 #login {
     margin-top: 10px;
 }
+
 #premiumRequired {
     position: absolute;
     margin-top: -30px;
     left: calc(50% + 150px);
     width: 200px;
 }
+
 #premiumRequired #arrow {
     width: 50px;
     transform: rotate(190deg) translateX(70px) translateY(-10px);
 }
+
 #tip {
     margin-top: 20px;
 }
@@ -92,6 +114,7 @@
     width: 1000px;
     margin: 0 auto;
 }
+
 #welcomeImg {
     display: inline-block;
     vertical-align: middle;
@@ -103,35 +126,50 @@
     background-size: 800px 400px;
     border: 1px solid white;
 }
+
 #welcomeImg:hover {
     background-position: -400px;
 }
+
+#welcomeImg figcaption {
+    font-family: 'Handlee', cursive;
+    font-size: 15pt;
+    text-align: center;
+    margin-top: 405px;
+}
+
 #welcomeInfoContainer #imgText {
     display: inline-block;
     vertical-align: middle;
     width: 500px;
 }
+
 #welcomeInfoContainer #imgText #p1 {
     margin: 0 0 70px;
 }
+
 #welcomeInfoContainer #imgText #p2 {
     margin: 70px 0 0;
 }
+
 #welcomeInfoContainer #motivation {
     text-align: center;
     color: #ccc;
     margin: 100px 0;
 }
+
 #adventure {
     font-size: 25px;
     text-align: center;
     margin-bottom: 20px;
 }
+
 #adventure #play {
     display: inline-block;
     width: 150px;
     height: 150px;
     border: 2px solid #1ed760;
+    background-color: #1ed760;
     background-image: url("/assets/play.svg");
     background-repeat: no-repeat;
     background-position: 55px 25px;
@@ -140,10 +178,12 @@
     transition: transform .2s, background-color .2s;
     cursor: pointer;
 }
+
 #adventure #play:hover {
     transform: scale(1.02);
-    background-color: rgba(30, 215, 96, 0.1);
+    background-color: rgba(30, 215, 96, 0.2);
 }
+
 #adventure #song {
     font-family: 'Handlee', cursive;
     text-align: right;
@@ -166,15 +206,18 @@
     background-position: center;
     border: 1px solid white;
 }
+
 #hangmanImg figcaption {
     font-family: 'Handlee', cursive;
     font-size: 13pt;
     text-align: center;
     margin-top: 260px;
 }
+
 #hangmanInfoContainer {
     text-align: center;
 }
+
 #hangmanInfoContainer #imgText {
     text-align: left;
     font-size: 18pt;
@@ -182,12 +225,15 @@
     vertical-align: middle;
     width: 400px;
 }
+
 #hangmanInfoContainer #imgText #p1 {
     margin: 0 0 70px;
 }
+
 #hangmanInfoContainer #imgText #p2 {
     margin: 70px 0 0;
 }
+
 #hangmanInfoContainer #hangmanFigure {
     display: inline-block;
     vertical-align: middle;

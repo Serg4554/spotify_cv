@@ -8,6 +8,9 @@ const load = () => dispatch => {
       dispatch(actions.setLoading(false));
       dispatch(actions.setReady(ready));
       dispatch(actions.setError(""));
+      SpotifyService.onStateChanged((playbackState) => {
+        dispatch(actions.setPlaybackState(playbackState));
+      })
     })
     .catch(error => {
       dispatch(actions.setLoading(false));
@@ -15,6 +18,10 @@ const load = () => dispatch => {
       dispatch(actions.setError(error));
     });
   dispatch(actions.setLoading(true));
+};
+
+const setText = (text) => dispatch => {
+  dispatch(actions.setText(text));
 };
 
 const play = (uri) => () => {
@@ -25,8 +32,14 @@ const pause = () => () => {
   SpotifyService.pause();
 };
 
+const updateState = () => () => {
+  SpotifyService.updateState();
+};
+
 export {
   load,
+  setText,
   play,
-  pause
+  pause,
+  updateState
 }

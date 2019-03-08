@@ -82,7 +82,7 @@ class Home extends React.Component {
                   "&response_type=token" +
                   "&redirect_uri=" + encodeURI(credentials.url + "/welcome") +
                   "&state=" + this.props.uuid +
-                  "&scope=" + encodeURI("streaming user-read-birthdate user-read-email user-read-private");
+                  "&scope=" + encodeURI("streaming user-read-birthdate user-read-email user-read-private user-read-playback-state user-modify-playback-state");
               }
             }}
           >

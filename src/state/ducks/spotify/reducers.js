@@ -3,15 +3,19 @@ import * as types from "./types";
 /** State shape
  * {
  *  loading: bool,
- *  error: string
- *  ready: bool
+ *  error: string,
+ *  ready: bool,
+ *  text: string,
+ *  playbackState: object
  * }
  */
 
 const initState = {
   loading: false,
   error: "",
-  ready: false
+  ready: false,
+  text: "",
+  playbackState: {}
 };
 
 const reducer = (state = initState, action) => {
@@ -32,6 +36,18 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         ready: action.payload.ready
+      };
+
+    case types.SET_TEXT:
+      return {
+        ...state,
+        text: action.payload.text
+      };
+
+    case types.SET_PLAYBACK_STATE:
+      return {
+        ...state,
+        playbackState: action.payload.playbackState
       };
 
     default:

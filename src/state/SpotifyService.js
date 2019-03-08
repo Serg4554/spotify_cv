@@ -6,7 +6,7 @@ const Spotify = new SpotifyWebApi();
 let device = '';
 let ready = false;
 let waitingToPlay = '';
-let statusListeners = [];
+let stateListeners = [];
 
 const setToken = token => {
   Spotify.setAccessToken(token);
@@ -36,9 +36,14 @@ const load = () => {
         reject("Account validation failed"); // No Spotify Premium
       });
 
-      // Status changed
-      player.addListener('player_state_changed', state => {
-        statusListeners.forEach(cb => cb(state));
+      // State changed
+      player.addListener('player_state_changed', res => {
+        const state = {
+          duration: res ? res.duration : 0,
+          paused: res ? res.paused : true,
+          position: res ? res.position : 0
+        };
+        stateListeners.forEach(cb => cb(state));
       });
 
       // Ready
@@ -76,8 +81,8 @@ const isReady = () => {
   return ready;
 };
 
-const onStatus = cb => {
-  statusListeners.push(cb);
+const onStateChanged = cb => {
+  stateListeners.push(cb);
 };
 
 const play = (uri) => {
@@ -94,11 +99,24 @@ const pause = () => {
   }
 };
 
+const updateState = () => {
+  Spotify.getMyCurrentPlaybackState()
+    .then(res => {
+      const state = {
+        duration: res.item ? res.item.duration_ms || 0 : 0,
+        paused: !res.is_playing,
+        position: res.progress_ms
+      };
+      stateListeners.forEach(cb => cb(state));
+    });
+};
+
 export default {
   setToken,
   load,
   isReady,
-  onStatus,
+  onStateChanged,
   play,
   pause,
+  updateState,
 };
