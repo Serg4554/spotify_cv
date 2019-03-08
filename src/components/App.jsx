@@ -52,7 +52,7 @@ class App extends Component {
       case "Account validation failed":
           return <p style={{margin: "0"}}>You need Spotify Premium! c'mon don't be stingy <span role="img" aria-label=":P">😇</span></p>;
       default:
-        return "";
+        return <p style={{margin: "0"}}>There is a problem with authentication <span role="img" aria-label="hmm">🤨</span></p>;
     }
   }
 
@@ -91,17 +91,6 @@ class App extends Component {
             <div style={{margin: "0 auto", width: "30px"}}>
               <ReactLoading type="bars" height={30} width={30} />
             </div>
-          </Modal>
-
-          <Modal
-            open={this.props.location !== "/" && !this.props.token}
-            onClose={() => this.props.goToUrl('')}
-            style={{maxWidth: '500px', textAlign: 'center'}}
-          >
-            <p style={{margin: '0 0 30px 0'}}>An error has occurred during the
-              authentication process, please return to home and try again by
-              clicking on the login button.</p>
-            <Button onClick={() => this.props.goToUrl('')}>Return home</Button>
           </Modal>
 
           <Switch>
