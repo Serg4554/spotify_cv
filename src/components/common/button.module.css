@@ -30,3 +30,7 @@
     padding: 11px 50px 9px;
     font-size: 18px;
 }
+.button.disabled {
+    background-color: #bbb;
+    cursor: default;
+}
