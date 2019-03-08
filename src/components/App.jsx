@@ -8,7 +8,6 @@ import {push} from "connected-react-router";
 
 import '../styles/app.css';
 import Modal from './common/modal'
-import Button from './common/button';
 import SnackBar from 'react-material-snackbar';
 import ReactLoading from 'react-loading';
 import Player from './Player';
