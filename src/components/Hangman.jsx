@@ -129,7 +129,7 @@ class Hangman extends React.Component {
         level++;
         if(level >= 6) {
           guess = ['Y', 'O', 'U', 'L', 'O', 'S', 'E', '!', '!'];
-          console.log(this.letters[id].blur());
+          this.letters[id].blur();
         }
       } else if(guess.every(letter => letter !== '')) {
         guess = ['Y', 'O', 'U', 'R', 'O', 'C', 'K', 'S', '!'];
