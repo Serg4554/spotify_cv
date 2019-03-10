@@ -7,11 +7,7 @@ import * as SpotifyOperations from '../state/ducks/spotify/operations'
 import HangmanFigure from './HangmanFigure';
 import Button from './common/button';
 
-const mapStateToProps = state => {
-  return {
-    ready: state.spotify.ready
-  }
-};
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
@@ -242,7 +238,7 @@ class Hangman extends React.Component {
           <Button
             className="continueButton"
             size="large"
-            onClick={() => {}}
+            onClick={() => this.props.goToUrl("/languages")}
           >
             Continue {!this.isTryAgainActive() ? " (Skip)" : ""}
           </Button>

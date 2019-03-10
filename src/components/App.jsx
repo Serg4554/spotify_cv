@@ -14,6 +14,7 @@ import Player from './Player';
 import Home from './Home'
 import Welcome from './Welcome'
 import Hangman from './Hangman'
+import Languages from './Languages'
 
 
 const mapStateToProps = state => ({
@@ -96,6 +97,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/welcome" component={Welcome} />
             <Route exact path="/hangman" component={Hangman} />
+            <Route exact path="/languages" component={Languages} />
           </Switch>
         </div>
 
