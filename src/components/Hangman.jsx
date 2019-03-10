@@ -133,6 +133,7 @@ class Hangman extends React.Component {
         }
       } else if(guess.every(letter => letter !== '')) {
         guess = ['Y', 'O', 'U', 'R', 'O', 'C', 'K', 'S', '!'];
+        this.letters[id].blur();
       } else if(id < 8) {
         this.letters[id + 1].focus();
       }
