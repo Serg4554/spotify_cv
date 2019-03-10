@@ -244,7 +244,7 @@ class Hangman extends React.Component {
             size="large"
             onClick={() => {}}
           >
-            {this.isTryAgainActive() ? "Continue" : "Skip"}
+            Continue {!this.isTryAgainActive() ? " (Skip)" : ""}
           </Button>
         </div>
       </div>
