@@ -7,11 +7,7 @@ import * as SpotifyOperations from '../state/ducks/spotify/operations'
 import Button from './common/button';
 import MusicalLanguages from './MusicalLanguages'
 
-const mapStateToProps = state => {
-  return {
-
-  }
-};
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
