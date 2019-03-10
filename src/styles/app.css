@@ -9,6 +9,7 @@
     padding: 20px;
     position: relative;
     height: calc(100vh - 110px);
+    overflow-x: auto;
 }
 
 .highlight-color {
