@@ -39,14 +39,11 @@ class Languages extends React.Component {
   render() {
     return (
       <div className="mainContainer">
-        <div id="hangmanInfoContainer">
-          <div id="headerText">
-            What I earned after <span className="highlight-color">10 years hacking code</span>, 3 of them for a startup and a <span className="highlight-color">Software Engineering degree</span>?
-          </div>
-
-          <MusicalLanguages onFinished={() => this.setState({finished: true})} />
+        <div id="headerText">
+          What I earned after <span className="highlight-color">10 years hacking code</span>, 3 of them for a startup and a <span className="highlight-color">Software Engineering degree</span>?
         </div>
 
+        <MusicalLanguages onFinished={() => this.setState({finished: true})} />
 
         <div className="continueButtonContainer">
           <Button
