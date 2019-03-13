@@ -41,6 +41,7 @@
     line-height: 116px;
     animation: dancing 1.3s infinite;
     cursor: pointer;
+    text-align: center;
 }
 
 @keyframes dancing {
