@@ -87,7 +87,7 @@ class MusicalLanguages extends React.Component {
       <div className={style.frame}>
         <div className={style.langList}>
           {this.state.langCaptured.map(lang => (
-            <div key={lang} className={style.langElement}>{lang.content}</div>
+            <div key={lang.content} className={style.langElement}>{lang.content}</div>
           ))}
         </div>
         {this.renderArena()}
