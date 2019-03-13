@@ -19,7 +19,7 @@ class MusicalLanguages extends React.Component {
       "MVP", "Express.js", "Redux", "Haskell", "MVC", "REST APIs"];
 
     let langPlaying = [];
-    langs.map((lang, i) => {
+    langs.forEach((lang, i) => {
       const left = (i * 200) % 800;
       const height = parseInt(i / 4);
       const top = (height * 116) % 580;
