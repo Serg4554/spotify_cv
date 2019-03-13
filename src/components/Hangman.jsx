@@ -7,7 +7,7 @@ import * as SpotifyOperations from '../state/ducks/spotify/operations'
 import HangmanFigure from './HangmanFigure';
 import Button from './common/button';
 
-const mapStateToProps = () => {};
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
