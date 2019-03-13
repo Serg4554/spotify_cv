@@ -1,4 +1,4 @@
-import credentials from '../config/credentials.json';
+import credentials from '../config/credentials';
 import SpotifyWebApi from 'spotify-web-api-js';
 
 const Spotify = new SpotifyWebApi();

@@ -2,7 +2,7 @@ import React from "react";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from "connected-react-router";
-import credentials from "../config/credentials.json"
+import credentials from "../config/credentials"
 
 import Button from "./common/button"
 
@@ -49,6 +49,16 @@ class Home extends React.Component {
     }, 2600));
   }
 
+  renderContinueWithoutLogin() {
+    if(this.props.loading || !this.props.ready || this.props.error) {
+      return (
+        <div id="continueWithoutLogin" onClick={() => this.props.goToUrl("/welcome")}>
+          Continue without music
+        </div>
+      );
+    }
+  }
+
   render() {
     const {loading, ready, error} = this.props;
 
@@ -66,7 +76,7 @@ class Home extends React.Component {
 
           <img id="me" src="/images/img_1.png" alt="This is me"/>
           <div id="premiumRequired">
-            You need <span className="highlight-color">Spotify Premium</span> to enjoy the experience
+            You need <span className="highlight-color">Spotify Premium</span> to enjoy the full experience
             <img id="arrow" src="/assets/arrow.svg" alt="arrow" />
           </div>
 
@@ -77,17 +87,13 @@ class Home extends React.Component {
               if(!loading && ready && !error) {
                 this.props.goToUrl("/welcome");
               } else {
-                window.location.href = "https://accounts.spotify.com/authorize" +
-                  "?client_id=" + credentials.clientId +
-                  "&response_type=token" +
-                  "&redirect_uri=" + encodeURI(credentials.url + "/welcome") +
-                  "&state=" + this.props.uuid +
-                  "&scope=" + encodeURI("streaming user-read-birthdate user-read-email user-read-private user-read-playback-state user-modify-playback-state");
+                window.location.href = credentials.getAuthUri(this.props.uuid);
               }
             }}
           >
             {!loading && ready && !error ? "Click" : "Login"} to continue
           </Button>
+          {this.renderContinueWithoutLogin()}
           <div id="tip" className="text-size-small">Tip: Turn up the volume or improve your
             extrasensory powers <span role="img" aria-label="wink">😉</span>
           </div>

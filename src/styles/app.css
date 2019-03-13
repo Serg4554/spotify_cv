@@ -102,6 +102,17 @@
     margin-top: 10px;
 }
 
+#continueWithoutLogin {
+    margin-top: 5px;
+    color: #bfbfbf;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#continueWithoutLogin:hover {
+    text-decoration: underline;
+}
+
 #premiumRequired {
     position: absolute;
     margin-top: -30px;
