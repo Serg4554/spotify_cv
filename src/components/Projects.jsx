@@ -70,7 +70,7 @@ class Projects extends React.Component {
             <div className="projectDialogContent">
               <div className="projectDialogTitle">{this.project.title}</div>
               <div className="projectDialogDescription">
-                {this.project.description ? this.project.description.split('\n').map(i => <p>{i}</p>) : ""}
+                {this.project.description ? this.project.description.split('\n').map((text, i) => <p key={i}>{text}</p>) : ""}
               </div>
             </div>
             <Button id="close" onClick={() => this.setState({projectId: 0})}>Close</Button>
