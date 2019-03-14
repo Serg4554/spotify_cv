@@ -1,11 +1,11 @@
-const url = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+const url = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
 const spotifyScopes = [
   'streaming',
   'user-read-birthdate',
   'user-read-email',
   'user-read-private',
   'user-read-playback-state',
-  'user-modify-playback-state'
+  'user-modify-playback-state',
 ];
 
 export default {
