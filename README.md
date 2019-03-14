@@ -7,4 +7,4 @@ The sole purpose of this project is to make Spotify's recruiters work more enter
 
 # Check it out
 You can check out this project without having a Spotify Premium account, but I recommend using it with an account to fully enjoy the experience. C'mon isn't expensive, don't be stingy 😉  
-Visit: [spotify.sergproject.com](http://spotify.sergproject.com)
+Visit: [spotify.sergproject.com](https://spotify.sergproject.com)
