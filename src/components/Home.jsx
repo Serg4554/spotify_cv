@@ -98,6 +98,8 @@ class Home extends React.Component {
             extrasensory powers <span role="img" aria-label="wink">😉</span>
           </div>
         </div>
+
+        <a id="goToResume" href={credentials.resume} target="_blank" rel="noopener noreferrer">Go directly to my resume</a>
       </div>
     );
   }
