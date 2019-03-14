@@ -2,6 +2,7 @@
     min-width: 1000px;
     padding: 20px;
     position: relative;
+    overflow: hidden;
 }
 
 .playerContainer {
@@ -9,7 +10,8 @@
     padding: 20px;
     position: relative;
     height: calc(100vh - 110px);
-    overflow-x: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .highlight-color {
@@ -20,6 +22,41 @@
     font-size: 35px;
 }
 
+#githubContainer {
+    position: fixed;
+    width: 125px;
+    height: 125px;
+    transform: rotate(45deg);
+    background: #1ed760;
+    top: -75px;
+    right: -75px;
+    cursor: pointer;
+    transition: background-color .2s, top .2s, right .2s, clip-path .2s;
+    clip-path: polygon(50% 64%, 14% 100%, 86% 100%);
+}
+
+#githubContainer:hover {
+    background: #2ebd59;
+    top: -65px;
+    right: -65px;
+    clip-path: polygon(50% 52%, 2% 100%, 98% 100%);
+}
+
+#githubContainer:hover #githubIcon  {
+    bottom: 10px;
+}
+
+#githubIcon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url("/assets/github.png");
+    background-size: 30px 30px;
+    transform: rotate(-45deg);
+    bottom: 4px;
+    right: 48px;
+    transition: bottom .2s;
+}
 
 /* Text config */
 .text-size-huge {

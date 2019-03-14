@@ -4,6 +4,7 @@ export default {
   playerName: "This is me. Serg",
   resume: "/files/resume.pdf",
   github: "https://github.com/Serg4554",
+  githubProject: "https://github.com/Serg4554/spotify_cv",
   linkedin: "https://www.linkedin.com/in/serg357",
   getAuthUri: (uuid) => "https://accounts.spotify.com/authorize" +
     "?client_id=7fd1e1e916ad43679ae2a30ddd43e728" +

@@ -92,8 +92,9 @@ class App extends Component {
     return (
       <div>
         <div className={this.isPlayerVisible() ? "playerContainer" : "container"}>
-          {this.renderSnackBar()}
-
+          <div id="githubContainer" onClick={() => window.open(credentials.githubProject,'_blank')}>
+            <div id="githubIcon"/>
+          </div>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/welcome" component={Welcome} />
@@ -101,6 +102,7 @@ class App extends Component {
             <Route exact path="/languages" component={Languages} />
             <Route exact path="/projects" component={Projects} />
           </Switch>
+          {this.renderSnackBar()}
         </div>
 
         <Player
