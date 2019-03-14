@@ -14,6 +14,7 @@ import Home from './Home'
 import Welcome from './Welcome'
 import Hangman from './Hangman'
 import Languages from './Languages'
+import Projects from './Projects'
 import credentials from '../config/credentials';
 import Button from "./common/button"
 
@@ -98,6 +99,7 @@ class App extends Component {
             <Route exact path="/welcome" component={Welcome} />
             <Route exact path="/hangman" component={Hangman} />
             <Route exact path="/languages" component={Languages} />
+            <Route exact path="/projects" component={Projects} />
           </Switch>
         </div>
 

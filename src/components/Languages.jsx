@@ -49,7 +49,7 @@ class Languages extends React.Component {
           <Button
             className="continueButton"
             size="large"
-            onClick={() => {}}
+            onClick={() => this.props.goToUrl("/projects")}
           >
             Continue {this.state.finished ? "" : " (Skip)"}
           </Button>
