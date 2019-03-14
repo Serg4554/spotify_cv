@@ -5,6 +5,7 @@ import { retrieveSession } from "../state/ducks/session/operations"
 import * as SpotifyOperations from "../state/ducks/spotify/operations"
 import { Route, Switch } from "react-router-dom";
 import {push} from "connected-react-router";
+import {isMobile} from "react-device-detect";
 
 import '../styles/app.css';
 import SnackBar from 'react-material-snackbar';
@@ -17,6 +18,7 @@ import Languages from './Languages'
 import Projects from './Projects'
 import credentials from '../config/credentials';
 import Button from "./common/button"
+import Modal from './common/modal';
 
 
 const mapStateToProps = state => ({
@@ -37,6 +39,13 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      openMobileWarning: isMobile
+    }
+  }
   componentWillMount() {
     this.props.retrieveSession();
     this.props.loadSpotify();
@@ -91,6 +100,13 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Modal open={this.state.openMobileWarning} onClose={() => this.setState({openMobileWarning: false})}>
+          <div className="mobileDialogTitle">Please visit this website from a computer!</div>
+          <div className="mobileDialogContent">This application has functions that are only available in modern desktop browsers, such as the Spotify Web Player.</div>
+          <div className="mobileDialogContent">So it has not been adapted for mobile use.</div>
+          <Button className="mobileDialogButton" size="large" onClick={() => this.setState({openMobileWarning: false})}>Continue anyway</Button>
+        </Modal>
+
         <div className={this.isPlayerVisible() ? "playerContainer" : "container"}>
           <div id="githubContainer" onClick={() => window.open(credentials.githubProject,'_blank')}>
             <div id="githubIcon"/>

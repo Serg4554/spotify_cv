@@ -9,6 +9,7 @@
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
     "react": "^16.4.2",
+    "react-device-detect": "^1.6.2",
     "react-dom": "^16.4.2",
     "react-loading": "^2.0.3",
     "react-material-snackbar": "^3.0.1",
