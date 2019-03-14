@@ -110,9 +110,9 @@ class Projects extends React.Component {
             <div>Check out my <a href={credentials.resume} target="_blank" rel="noopener noreferrer">resume</a></div>
             <div>Check out my <a href={credentials.github} target="_blank" rel="noopener noreferrer">github</a><span
               className="codeOfThis">and the code of this :)</span></div>
-            <div>Check out my <a href={credentials.linkedin} target="_blank" rel="noopener noreferrer">linkedIn</a>
-            </div>
+            <div>Check out my <a href={credentials.linkedin} target="_blank" rel="noopener noreferrer">linkedIn</a></div>
           </div>
+          <div className="call">Give me a call! +34 627 15 19 15</div>
         </div>
       </div>
     );
