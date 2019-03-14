@@ -33,7 +33,7 @@ class Hangman extends React.Component {
   componentWillMount() {
     console.log("//////////////////////////////////////////////////////////////");
     console.log("// I got you!! Trying to hack me and find the solution?? 🤨 //");
-    console.log("//      Ok ok... You won, the solution is: THE NIGHTS       //");
+    console.log("//      Ok ok... You win, the solution is: THE NIGHTS       //");
     console.log("//////////////////////////////////////////////////////////////");
 
     this.props.play("spotify:track:0ct6r3EGTcMLPtrXHDvVjc", true);
