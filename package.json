@@ -1,7 +1,8 @@
 {
   "name": "spotify-cv",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
+  "homepage": "./",
   "dependencies": {
     "connected-react-router": "^4.3.0",
     "crypto": "^1.0.1",
