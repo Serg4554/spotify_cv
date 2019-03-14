@@ -7,6 +7,7 @@ import projects from '../config/projects'
 
 import Modal from './common/modal';
 import Button from './common/button';
+import credentials from '../config/credentials';
 
 const mapStateToProps = () => ({});
 
@@ -97,6 +98,16 @@ class Projects extends React.Component {
               </div>
             </div>
           ))}
+        </div>
+
+        <div id="whatIsNext">
+          <div className="title">What is next?</div>
+          <div className="onlyYouDecide">Only you can decide it</div>
+          <div className="content">
+            <div>Check out my <a href={credentials.resume} target="_blank" rel="noopener noreferrer">resume</a></div>
+            <div>Check out my <a href={credentials.github} target="_blank" rel="noopener noreferrer">github</a><span className="codeOfThis">and the code of this :)</span></div>
+            <div>Check out my <a href={credentials.linkedin} target="_blank" rel="noopener noreferrer">linkedIn</a></div>
+          </div>
         </div>
       </div>
     );

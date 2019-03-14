@@ -393,3 +393,36 @@
     text-align: right;
     margin-top: 20px;
 }
+#whatIsNext {
+    background: #1ed760;
+    width: calc(100% + 40px);
+    margin: 0 0 -20px -20px;
+}
+#whatIsNext .title {
+    font-size: 60pt;
+    color: black;
+    text-align: center;
+}
+#whatIsNext .onlyYouDecide {
+    text-shadow: none;
+    font-family: 'Handlee', cursive;
+    color: black;
+    margin-top: -20px;
+    text-align: center;
+}
+#whatIsNext .content {
+    text-shadow: 0 0 1px rgba(0, 0, 0, .5);
+    padding: 20px 0 40px 0;
+    width: fit-content;
+    margin: 0 auto;
+}
+#whatIsNext a {
+    color: white;
+}
+#whatIsNext .codeOfThis {
+    position: absolute;
+    font-family: 'Handlee', cursive;
+    margin: 5px 0 0 10px;
+    font-size: 15pt;
+    transform: rotate(-5deg);
+}
