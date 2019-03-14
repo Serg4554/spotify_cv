@@ -1,26 +1,26 @@
-import * as types from "./types";
+import * as types from './types';
 
 export const setLoading = (loading) => ({
   type: types.SET_LOADING,
-  payload: { loading }
+  payload: {loading},
 });
 
 export const setError = (error) => ({
   type: types.SET_ERROR,
-  payload: { error }
+  payload: {error},
 });
 
 export const setReady = (ready) => ({
   type: types.SET_READY,
-  payload: { ready }
+  payload: {ready},
 });
 
 export const setText = (text) => ({
   type: types.SET_TEXT,
-  payload: { text }
+  payload: {text},
 });
 
 export const setPlaybackState = (playbackState) => ({
   type: types.SET_PLAYBACK_STATE,
-  payload: { playbackState }
+  payload: {playbackState},
 });

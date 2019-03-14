@@ -1,8 +1,8 @@
-import React from "react";
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { push } from "connected-react-router";
-import * as SpotifyOperations from '../state/ducks/spotify/operations'
+import React from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {push} from 'connected-react-router';
+import * as SpotifyOperations from '../state/ducks/spotify/operations';
 
 import HangmanFigure from './HangmanFigure';
 import Button from './common/button';
@@ -13,9 +13,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
   pause: SpotifyOperations.pause,
   setText: SpotifyOperations.setText,
-  goToUrl: url => {
-    return push(url)
-  }
+  goToUrl: url => push(url),
 }, dispatch);
 
 class Hangman extends React.Component {
@@ -24,20 +22,20 @@ class Hangman extends React.Component {
 
     this.state = {
       level: 0,
-      guess: ['', '', '', '', '', '', '', '', '']
+      guess: ['', '', '', '', '', '', '', '', ''],
     };
 
     this.letters = [];
   }
 
   componentWillMount() {
-    console.log("//////////////////////////////////////////////////////////////");
-    console.log("// I got you!! Trying to hack me and find the solution?? 🤨 //");
-    console.log("//      Ok ok... You win, the solution is: THE NIGHTS       //");
-    console.log("//////////////////////////////////////////////////////////////");
+    console.log('//////////////////////////////////////////////////////////////');
+    console.log('// I got you!! Trying to hack me and find the solution?? 🤨 //');
+    console.log('//      Ok ok... You win, the solution is: THE NIGHTS       //');
+    console.log('//////////////////////////////////////////////////////////////');
 
-    this.props.play("spotify:track:0ct6r3EGTcMLPtrXHDvVjc", true);
-    this.props.setText("What is the name of the song?");
+    this.props.play('spotify:track:0ct6r3EGTcMLPtrXHDvVjc', true);
+    this.props.setText('What is the name of the song?');
   }
 
   componentWillUnmount() {
@@ -49,70 +47,70 @@ class Hangman extends React.Component {
     let guess = this.state.guess;
     const lost = level >= 6;
     const letter = event.target.value ?
-      event.target.value[event.target.value.length - 1].toUpperCase() : "";
+      event.target.value[event.target.value.length - 1].toUpperCase() : '';
 
     let fail = false;
-    switch(id) {
+    switch (id) {
       case 0:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'T';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 1:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'H';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 2:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'E';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 3:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'N';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 4:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'I';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 5:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'G';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 6:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'H';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 7:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'T';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
       case 8:
-        if(guess[id] !== '') break;
+        if (guess[id] !== '') break;
         fail = letter !== 'S';
-        if(!fail) {
+        if (!fail) {
           guess[id] = letter;
         }
         break;
@@ -120,17 +118,17 @@ class Hangman extends React.Component {
         break;
     }
 
-    if(!lost) {
-      if(fail) {
+    if (!lost) {
+      if (fail) {
         level++;
-        if(level >= 6) {
+        if (level >= 6) {
           guess = ['Y', 'O', 'U', 'L', 'O', 'S', 'E', '!', '!'];
           this.letters[id].blur();
         }
-      } else if(guess.every(letter => letter !== '')) {
+      } else if (guess.every(letter => letter !== '')) {
         guess = ['Y', 'O', 'U', 'R', 'O', 'C', 'K', 'S', '!'];
         this.letters[id].blur();
-      } else if(id < 8) {
+      } else if (id < 8) {
         this.letters[id + 1].focus();
       }
     }
@@ -153,12 +151,13 @@ class Hangman extends React.Component {
 
           <div id="imgText">
             <p id="p1">
-              I <span className="highlight-color">love software</span> since I was born, so I would say I'm made for this. That's why I <span className="highlight-color">care everything I do</span>
+              I <span className="highlight-color">love software</span> since I was born, so I would say I'm made for
+              this. That's why I <span className="highlight-color">care everything I do</span>
             </p>
             <p id="p2">So please, don't kill my <span className="highlight-color">stickman</span>!!</p>
           </div>
 
-          <HangmanFigure id="hangmanFigure" level={this.state.level} />
+          <HangmanFigure id="hangmanFigure" level={this.state.level}/>
         </div>
 
         {/* HTML STRUCTURE FOR: THE NIGHTS */}
@@ -176,52 +175,54 @@ class Hangman extends React.Component {
             className="hangmanLetter"
             type="text"
             value={this.state.guess[1]}
-            onChange={(e) => this.handleGuess(1, e)} />
+            onChange={(e) => this.handleGuess(1, e)}/>
           <input
             ref={obj => this.letters[2] = obj}
             className="hangmanLetter"
             type="text"
             value={this.state.guess[2]}
-            onChange={(e) => this.handleGuess(2, e)} />
-          <div style={{display: "inline-block", width: "70px"}} />
+            onChange={(e) => this.handleGuess(2, e)}/>
+          <div style={{display: 'inline-block', width: '70px'}}/>
           <input
             ref={obj => this.letters[3] = obj}
             className="hangmanLetter"
             type="text"
             value={this.state.guess[3]}
-            onChange={(e) => this.handleGuess(3, e)} />
+            onChange={(e) => this.handleGuess(3, e)}/>
           <input
             ref={obj => this.letters[4] = obj}
             className="hangmanLetter"
             type="text"
             value={this.state.guess[4]}
-            onChange={(e) => this.handleGuess(4, e)} />
+            onChange={(e) => this.handleGuess(4, e)}/>
           <input
             ref={obj => this.letters[5] = obj}
             className="hangmanLetter"
             type="text"
             value={this.state.guess[5]}
-            onChange={(e) => this.handleGuess(5, e)} />
+            onChange={(e) => this.handleGuess(5, e)}/>
           <input
             ref={obj => this.letters[6] = obj}
             className="hangmanLetter"
             type="text"
             value={this.state.guess[6]}
-            onChange={(e) => this.handleGuess(6, e)} />
+            onChange={(e) => this.handleGuess(6, e)}/>
           <input
             ref={obj => this.letters[7] = obj}
             className="hangmanLetter"
             type="text"
             value={this.state.guess[7]}
-            onChange={(e) => this.handleGuess(7, e)} />
+            onChange={(e) => this.handleGuess(7, e)}/>
           <input
             ref={obj => this.letters[8] = obj}
             className="hangmanLetter"
             type="text"
             value={this.state.guess[8]}
-            onChange={(e) => this.handleGuess(8, e)} />
+            onChange={(e) => this.handleGuess(8, e)}/>
         </div>
-        <div id="hangmanLettersCaption">The answer is visible somewhere, will you be able to find it? <span role="img" aria-label=";)">😏</span></div>
+        <div id="hangmanLettersCaption">
+          The answer is visible somewhere, will you be able to find it? <span role="img" aria-label=";)">😏</span>
+        </div>
 
         <div className="continueButtonContainer">
           <Button
@@ -238,9 +239,9 @@ class Hangman extends React.Component {
           <Button
             className="continueButton"
             size="large"
-            onClick={() => this.props.goToUrl("/languages")}
+            onClick={() => this.props.goToUrl('/languages')}
           >
-            Continue {!this.isTryAgainActive() ? " (Skip)" : ""}
+            Continue {!this.isTryAgainActive() ? ' (Skip)' : ''}
           </Button>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
-import * as reducers from "./ducks";
-import thunk from 'redux-thunk'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
-import createHistory from 'history/createBrowserHistory'
+import {applyMiddleware, createStore, compose, combineReducers} from 'redux';
+import * as reducers from './ducks';
+import thunk from 'redux-thunk';
+import {connectRouter, routerMiddleware} from 'connected-react-router';
+import createHistory from 'history/createBrowserHistory';
 
 export const history = createHistory();
 
@@ -18,13 +18,13 @@ if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
 
   if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension())
+    enhancers.push(devToolsExtension());
   }
 }
 
 const composedEnhancers = compose(
   applyMiddleware(...middleware),
-  ...enhancers
+  ...enhancers,
 );
 
 const rootReducer = combineReducers(reducers);
@@ -32,7 +32,7 @@ const rootReducer = combineReducers(reducers);
 const store = createStore(
   connectRouter(history)(rootReducer),
   initialState,
-  composedEnhancers
+  composedEnhancers,
 );
 
 export default store;

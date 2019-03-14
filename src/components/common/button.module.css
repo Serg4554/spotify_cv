@@ -13,23 +13,28 @@
     font-weight: 600;
     cursor: pointer;
     vertical-align: middle;
-    transition: background-color .2s,color .2s;
+    transition: background-color .2s, color .2s;
 }
+
 .button:hover {
     background-color: #2ebd59;
 }
+
 .button.small {
     padding: 3px 15px 3px;
     font-size: 10px;
 }
+
 .button.medium {
     padding: 5px 25px 5px;
     font-size: 16px;
 }
+
 .button.large {
     padding: 11px 50px 9px;
     font-size: 18px;
 }
+
 .button.disabled {
     background-color: #bbb;
     cursor: default;

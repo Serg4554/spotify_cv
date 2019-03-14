@@ -1,5 +1,5 @@
-import * as actions from "./actions"
-import SpotifyService from "../../SpotifyService";
+import * as actions from './actions';
+import SpotifyService from '../../SpotifyService';
 
 const load = () => dispatch => {
   SpotifyService.pause();
@@ -7,10 +7,10 @@ const load = () => dispatch => {
     .then(ready => {
       dispatch(actions.setLoading(false));
       dispatch(actions.setReady(ready));
-      dispatch(actions.setError(""));
+      dispatch(actions.setError(''));
       SpotifyService.onStateChanged((playbackState) => {
         dispatch(actions.setPlaybackState(playbackState));
-      })
+      });
     })
     .catch(error => {
       dispatch(actions.setLoading(false));
@@ -41,5 +41,5 @@ export {
   setText,
   play,
   pause,
-  updateState
-}
+  updateState,
+};

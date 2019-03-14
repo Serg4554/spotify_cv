@@ -1,4 +1,4 @@
-import * as types from "./types";
+import * as types from './types';
 
 /** State shape
  * {
@@ -12,13 +12,13 @@ const reducer = (state = {}, action) => {
     case types.SET_UUID:
       return {
         ...state,
-        uuid: action.payload.uuid
+        uuid: action.payload.uuid,
       };
 
     case types.SET_TOKEN:
       return {
         ...state,
-        token: action.payload.token
+        token: action.payload.token,
       };
 
     default:

@@ -16,8 +16,8 @@ const setToken = token => {
 const load = () => {
   return new Promise((resolve, reject) => {
     function loadWebPlayer() {
-      if(!Spotify.getAccessToken()) {
-        return reject("No token provided");
+      if (!Spotify.getAccessToken()) {
+        return reject('No token provided');
       }
 
       const player = new window.Spotify.Player({
@@ -26,15 +26,15 @@ const load = () => {
       });
 
       player.addListener('initialization_error', () => {
-        reject("Initialization failed"); // Unsupported browser
+        reject('Initialization failed'); // Unsupported browser
       });
 
       player.addListener('authentication_error', () => {
-        reject("Authentication failed"); // Invalid token
+        reject('Authentication failed'); // Invalid token
       });
 
       player.addListener('account_error', () => {
-        reject("Account validation failed"); // No Spotify Premium
+        reject('Account validation failed'); // No Spotify Premium
       });
 
       // State changed
@@ -42,7 +42,7 @@ const load = () => {
         const state = {
           duration: res ? res.duration : 0,
           paused: res ? res.paused : true,
-          position: res ? res.position : 0
+          position: res ? res.position : 0,
         };
         stateListeners.forEach(cb => cb(state));
       });
@@ -52,7 +52,7 @@ const load = () => {
         device = device_id;
         ready = true;
         resolve(ready);
-        if(waitingToPlay) {
+        if (waitingToPlay) {
           play(waitingToPlay, repeat);
           waitingToPlay = '';
         }
@@ -68,7 +68,7 @@ const load = () => {
       player.connect();
     }
 
-    if(!window.Spotify) {
+    if (!window.Spotify) {
       window.onSpotifyWebPlaybackSDKReady = () => {
         loadWebPlayer();
       };
@@ -88,11 +88,11 @@ const onStateChanged = cb => {
 
 const play = (uri, _repeat) => {
   repeat = _repeat;
-  if(ready) {
+  if (ready) {
     Spotify.play({device_id: device, uris: [uri]})
       .then(() => {
         setTimeout(() => {
-          if(repeat) {
+          if (repeat) {
             Spotify.setRepeat('track');
           } else {
             Spotify.setRepeat('off');
@@ -105,21 +105,23 @@ const play = (uri, _repeat) => {
 };
 
 const pause = () => {
-  if(device) {
+  if (device) {
     Spotify.pause({device_id: device});
   }
 };
 
 const updateState = () => {
-  Spotify.getMyCurrentPlaybackState()
-    .then(res => {
-      const state = {
-        duration: res.item ? res.item.duration_ms || 0 : 0,
-        paused: !res.is_playing,
-        position: res.progress_ms
-      };
-      stateListeners.forEach(cb => cb(state));
-    });
+  if (device) {
+    Spotify.getMyCurrentPlaybackState()
+      .then(res => {
+        const state = {
+          duration: res.item ? res.item.duration_ms || 0 : 0,
+          paused: !res.is_playing,
+          position: res.progress_ms,
+        };
+        stateListeners.forEach(cb => cb(state));
+      });
+  }
 };
 
 export default {

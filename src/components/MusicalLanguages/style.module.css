@@ -46,9 +46,15 @@
 }
 
 @keyframes dancing {
-    0% { transform: rotate(5deg) translate(-5px, 0); }
-    50% { transform: rotate(-5deg) translate(5px, 0); }
-    100% { transform: rotate(5deg) translate(-5px, 0); }
+    0% {
+        transform: rotate(5deg) translate(-5px, 0);
+    }
+    50% {
+        transform: rotate(-5deg) translate(5px, 0);
+    }
+    100% {
+        transform: rotate(5deg) translate(-5px, 0);
+    }
 }
 
 .memeTxt {

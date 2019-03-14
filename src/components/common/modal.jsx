@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import ResponsiveModal from 'react-responsive-modal';
 
 const Modal = (props) => {
   let modalStyle = {
-    borderRadius: "5px",
-    background: "#252525",
-    boxShadow: "0 5px 30px 0 rgba(0, 0, 0, .5)",
-    border: "1px solid #0d632c"
+    borderRadius: '5px',
+    background: '#252525',
+    boxShadow: '0 5px 30px 0 rgba(0, 0, 0, .5)',
+    border: '1px solid #0d632c',
   };
   Object.assign(modalStyle, props.style);
 
@@ -17,9 +17,9 @@ const Modal = (props) => {
       {...other}
       center
       styles={{
-        overlay: {background: "rgba(0, 0, 0, .6)"},
+        overlay: {background: 'rgba(0, 0, 0, .6)'},
         modal: modalStyle,
-        closeButton: {visibility: "hidden"}
+        closeButton: {visibility: 'hidden'},
       }}
     >
       {props.children}

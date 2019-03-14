@@ -3,6 +3,7 @@
     width: 207px;
     height: 310px;
 }
+
 .poleBase {
     position: absolute;
     background: white;
@@ -13,6 +14,7 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
 .pole {
     position: absolute;
     background: white;
@@ -21,6 +23,7 @@
     top: 0;
     left: 152px;
 }
+
 .poleTop {
     position: absolute;
     background: white;
@@ -31,9 +34,11 @@
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
 .figure {
     transition: opacity .1s;
 }
+
 .string {
     position: absolute;
     background: white;
@@ -42,6 +47,7 @@
     top: 0;
     left: 37px;
 }
+
 .head {
     position: absolute;
     border: 5px solid white;
@@ -51,6 +57,7 @@
     left: 12px;
     border-radius: 25px;
 }
+
 .body {
     position: absolute;
     background: white;
@@ -59,6 +66,7 @@
     top: 100px;
     left: 35px;
 }
+
 .leftArm {
     position: absolute;
     background: white;
@@ -70,6 +78,7 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+
 .rightArm {
     position: absolute;
     background: white;
@@ -81,6 +90,7 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+
 .leftLeg {
     position: absolute;
     background: white;
@@ -92,6 +102,7 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+
 .rightLeg {
     position: absolute;
     background: white;

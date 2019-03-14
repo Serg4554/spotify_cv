@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import style from './style.module.css';
 
 class MusicalLanguages extends React.Component {
@@ -9,14 +9,14 @@ class MusicalLanguages extends React.Component {
     this.state = {
       langPlaying: [],
       langCaptured: [],
-      finished: false
-    }
+      finished: false,
+    };
   }
 
   componentWillMount() {
-    const langs = ["JavaScript", "C/C++", "Qt", "MySQL", "Java", "C#", "SQLite",
-      "Loopback", "React", "MongoDB", "Node.js", "UML", "PHP", "HTML + CSS",
-      "MVP", "Express.js", "Redux", "Haskell", "MVC", "REST APIs"];
+    const langs = ['JavaScript', 'C/C++', 'Qt', 'MySQL', 'Java', 'C#', 'SQLite',
+      'Loopback', 'React', 'MongoDB', 'Node.js', 'UML', 'PHP', 'HTML + CSS',
+      'MVP', 'Express.js', 'Redux', 'Haskell', 'MVC', 'REST APIs'];
 
     let langPlaying = [];
     langs.forEach((lang, i) => {
@@ -30,7 +30,7 @@ class MusicalLanguages extends React.Component {
   }
 
   renderArena() {
-    if(!this.state.finished) {
+    if (!this.state.finished) {
       return (
         <div className={style.langArena}>
           {this.state.langPlaying.map(lang => (
@@ -97,7 +97,7 @@ class MusicalLanguages extends React.Component {
 }
 
 MusicalLanguages.propTypes = {
-  onFinished: PropTypes.func
+  onFinished: PropTypes.func,
 };
 
 export default MusicalLanguages;

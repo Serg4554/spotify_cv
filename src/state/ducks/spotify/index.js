@@ -1,7 +1,7 @@
-import reducer from "./reducers";
+import reducer from './reducers';
 
-import * as spotifyOperations from "./operations";
-import * as spotifyTypes from "./types";
+import * as spotifyOperations from './operations';
+import * as spotifyTypes from './types';
 
 export {
   spotifyOperations,

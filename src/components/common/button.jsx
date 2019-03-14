@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import style from './button.module.css';
 
 const Button = (props) => {
   const {size, enabled, onClick, ...other} = props;
 
   let classNames = [style.button, style[props.size]];
-  if(!props.enabled) {
+  if (!props.enabled) {
     classNames.push(style.disabled);
   }
 
@@ -14,7 +14,7 @@ const Button = (props) => {
     <div
       {...other}
       onClick={() => {
-        if(props.enabled && onClick) {
+        if (props.enabled && onClick) {
           onClick();
         }
       }}
@@ -26,12 +26,12 @@ const Button = (props) => {
 
 Button.propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  enabled: PropTypes.bool
+  enabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
   size: 'medium',
-  enabled: true
+  enabled: true,
 };
 
 export default Button;
