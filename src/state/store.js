@@ -6,6 +6,13 @@ import createHistory from 'history/createBrowserHistory';
 
 export const history = createHistory();
 
+history.listen(location => {
+  window.gtag('config', 'UA-66314202-2', {
+    'page_location': window.location.href,
+    'page_path': location.pathname + location.search,
+  });
+});
+
 const initialState = {};
 const enhancers = [];
 const middleware = [
