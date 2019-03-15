@@ -85,7 +85,6 @@ function checkResponse(promise, accept, reject) {
   promise
     .then((res) => accept(res))
     .catch((res) => {
-      console.log(res);
       const response = JSON.parse(res.response);
       if (response && response.error) {
         if (response.error.reason === 'PREMIUM_REQUIRED') {
