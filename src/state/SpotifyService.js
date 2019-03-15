@@ -5,7 +5,7 @@ const Spotify = new SpotifyWebApi();
 
 let device = '';
 let ready = false;
-let waitingToPlay = '';
+let waitingToPlay = {};
 let stateListeners = [];
 let repeat = false;
 
@@ -52,9 +52,8 @@ const load = () => {
         device = device_id;
         ready = true;
         resolve(ready);
-        if (waitingToPlay) {
-          play(waitingToPlay, repeat);
-          waitingToPlay = '';
+        if (waitingToPlay.uri) {
+          playPromise(waitingToPlay);
         }
       });
 
@@ -78,56 +77,67 @@ const load = () => {
   });
 };
 
-const isReady = () => {
-  return ready;
-};
-
 const onStateChanged = cb => {
   stateListeners.push(cb);
 };
 
-const play = (uri, _repeat) => {
+function checkResponse(promise, accept, reject) {
+  promise
+    .then((res) => accept(res))
+    .catch((res) => {
+      console.log(res);
+      const response = JSON.parse(res.response);
+      if (response && response.error) {
+        if (response.error.reason === 'PREMIUM_REQUIRED') {
+          return reject('Account validation failed');
+        }
+      }
+      reject(res.response.message);
+    });
+}
+
+function playPromise({uri, accept, reject}) {
+  waitingToPlay = {};
+  checkResponse(Spotify.play({device_id: device, uris: [uri]}), () => {
+    setTimeout(() => {
+      checkResponse(Spotify.setRepeat(repeat ? 'track' : 'off'), accept, reject);
+    }, 1000);
+  }, reject);
+}
+
+const play = (uri, _repeat) => new Promise((accept, reject) => {
   repeat = _repeat;
+  waitingToPlay = {uri, accept, reject};
   if (ready) {
-    Spotify.play({device_id: device, uris: [uri]})
-      .then(() => {
-        setTimeout(() => {
-          if (repeat) {
-            Spotify.setRepeat('track');
-          } else {
-            Spotify.setRepeat('off');
-          }
-        }, 1000);
-      });
+    playPromise(waitingToPlay);
+  }
+});
+
+const pause = () => new Promise((accept, reject) => {
+  if (device) {
+    checkResponse(Spotify.pause({device_id: device}), accept, reject);
   } else {
-    waitingToPlay = uri;
+    accept();
   }
-};
+});
 
-const pause = () => {
+const updateState = () => new Promise((accept, reject) => {
   if (device) {
-    Spotify.pause({device_id: device});
+    checkResponse(Spotify.getMyCurrentPlaybackState(), (res) => {
+      const state = {
+        duration: res.item ? res.item.duration_ms || 0 : 0,
+        paused: !res.is_playing,
+        position: res.progress_ms,
+      };
+      stateListeners.forEach(cb => cb(state));
+      accept();
+    }, reject);
   }
-};
-
-const updateState = () => {
-  if (device) {
-    Spotify.getMyCurrentPlaybackState()
-      .then(res => {
-        const state = {
-          duration: res.item ? res.item.duration_ms || 0 : 0,
-          paused: !res.is_playing,
-          position: res.progress_ms,
-        };
-        stateListeners.forEach(cb => cb(state));
-      });
-  }
-};
+});
 
 export default {
   setToken,
   load,
-  isReady,
   onStateChanged,
   play,
   pause,

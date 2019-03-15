@@ -32,6 +32,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   retrieveSession,
   loadSpotify: SpotifyOperations.load,
+  logoutSpotify: SpotifyOperations.logout,
   goToUrl: url => push(url),
 }, dispatch);
 
@@ -53,6 +54,29 @@ class App extends Component {
     return this.props.location !== '/' && this.props.location !== '/welcome';
   }
 
+  getErrorMessage() {
+    switch (this.props.error) {
+      case 'Initialization failed':
+        return (
+          <p style={{margin: '0'}}>
+            Ops! We couldn't initialize the music player <span role="img" aria-label="ops">😖</span>
+            <br/>
+            Make sure the address starts with https:// or try to use another browser
+          </p>
+        );
+      case 'Account validation failed':
+        return (
+          <p style={{margin: '0'}}>
+            You need Spotify Premium to listed the music <span role="img" aria-label="ups">😅</span>
+            <br/>
+            But don't worry, you can continue without music! <span role="img" aria-label=":D">😁</span>
+          </p>
+        );
+      default:
+        return '';
+    }
+  }
+
   renderSnackBar() {
     let snackbar;
     if (this.props.loading) {
@@ -72,7 +96,7 @@ class App extends Component {
           <Button
             style={{marginLeft: '10px'}}
             size="medium"
-            onClick={() => window.location.href = credentials.getAuthUri(this.props.uuid)}
+            onClick={() => window.location.href = credentials.getAuthUri(this.props.uuid, true)}
           >
             Login
           </Button>
@@ -95,7 +119,21 @@ class App extends Component {
     );
   }
 
+  renderErrorWarning() {
+    return (
+      <Modal
+        open={!!this.getErrorMessage()}
+        onClose={() => this.props.logoutSpotify()}
+        style={{maxWidth: '600px', textAlign: 'center'}}
+      >
+        {this.getErrorMessage()}
+        <Button style={{textAlign: 'center', marginTop: '10px'}} onClick={() => this.props.logoutSpotify()}>OK</Button>
+      </Modal>
+    );
+  }
+
   render() {
+    console.log(this.props.error);
     return (
       <div>
         <Modal open={this.state.openMobileWarning} onClose={() => this.setState({openMobileWarning: false})}>
@@ -104,15 +142,19 @@ class App extends Component {
             browsers, such as the Spotify Web Player.
           </div>
           <div className="mobileDialogContent">So it has not been adapted for mobile use.</div>
-          <Button className="mobileDialogButton" size="large" onClick={() => this.setState({openMobileWarning: false})}>Continue
-            anyway</Button>
+          <Button className="mobileDialogButton" size="large" onClick={() => this.setState({openMobileWarning: false})}>
+            Continue anyway
+          </Button>
         </Modal>
 
         <div className={this.isPlayerVisible() ? 'playerContainer' : 'container'}>
           {this.renderSnackBar()}
+          {this.renderErrorWarning()}
+
           <div id="githubContainer" onClick={() => window.open(credentials.githubProject, '_blank')}>
             <div id="githubIcon"/>
           </div>
+
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/welcome" component={Welcome}/>

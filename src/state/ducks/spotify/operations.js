@@ -1,4 +1,5 @@
 import * as actions from './actions';
+import * as sessionOperations from '../session/operations';
 import SpotifyService from '../../SpotifyService';
 
 const load = () => dispatch => {
@@ -24,16 +25,45 @@ const setText = (text) => dispatch => {
   dispatch(actions.setText(text));
 };
 
-const play = (uri, repeat) => () => {
-  SpotifyService.play(uri, repeat);
+const play = (uri, repeat) => (dispatch, getState) => {
+  if (!getState().spotify.error) {
+    SpotifyService.play(uri, repeat)
+      .then(() => {
+        dispatch(actions.setError(''));
+      })
+      .catch(error => {
+        dispatch(actions.setReady(false));
+        dispatch(actions.setError(error));
+      });
+  }
 };
 
-const pause = () => () => {
-  SpotifyService.pause();
+const pause = () => (dispatch, getState) => {
+  if (!getState().spotify.error) {
+    SpotifyService.pause()
+      .then(() => dispatch(actions.setError('')))
+      .catch(error => {
+        dispatch(actions.setReady(false));
+        dispatch(actions.setError(error));
+      });
+  }
 };
 
-const updateState = () => () => {
-  SpotifyService.updateState();
+const updateState = () => (dispatch, getState) => {
+  if (getState().spotify.ready) {
+    SpotifyService.updateState()
+      .then(() => dispatch(actions.setError('')))
+      .catch(error => {
+        dispatch(actions.setReady(false));
+        dispatch(actions.setError(error));
+      });
+  }
+};
+
+const logout = () => dispatch => {
+  dispatch(sessionOperations.setToken(''));
+  dispatch(actions.setReady(false));
+  dispatch(actions.setError('No token provided'));
 };
 
 export {
@@ -42,4 +72,5 @@ export {
   play,
   pause,
   updateState,
+  logout,
 };

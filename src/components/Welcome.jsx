@@ -23,6 +23,7 @@ class Welcome extends React.Component {
   componentWillMount() {
     if (this.props.location.hash) {
       let payload = queryString.parse(this.props.location.hash);
+      this.props.history.replace(this.props.history.location.pathname);
       if (payload.state === this.props.uuid && this.props.token !== payload.access_token) {
         this.props.setToken(payload.access_token);
         this.props.loadSpotify();

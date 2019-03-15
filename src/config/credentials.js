@@ -14,10 +14,11 @@ export default {
   github: 'https://github.com/Serg4554',
   githubProject: 'https://github.com/Serg4554/spotify_cv',
   linkedin: 'https://www.linkedin.com/in/serg357',
-  getAuthUri: (uuid) => 'https://accounts.spotify.com/authorize' +
+  getAuthUri: (uuid, force) => 'https://accounts.spotify.com/authorize' +
     '?client_id=7fd1e1e916ad43679ae2a30ddd43e728' +
     '&response_type=token' +
     '&redirect_uri=' + encodeURI(url + '/welcome') +
     '&state=' + uuid +
-    '&scope=' + encodeURI(spotifyScopes.join(' ')),
+    '&scope=' + encodeURI(spotifyScopes.join(' ')) +
+    (force ? "&show_dialog=true" : "")
 };
