@@ -24,3 +24,8 @@ export const setPlaybackState = (playbackState) => ({
   type: types.SET_PLAYBACK_STATE,
   payload: {playbackState},
 });
+
+export const setMute = (mute) => ({
+  type: types.SET_MUTE,
+  payload: {mute},
+});

@@ -66,6 +66,13 @@ const logout = () => dispatch => {
   dispatch(actions.setError('No token provided'));
 };
 
+const setMute = (mute) => (dispatch) => {
+  dispatch(actions.setMute(mute));
+  if (mute) {
+    dispatch(pause());
+  }
+};
+
 export {
   load,
   setText,
@@ -73,4 +80,5 @@ export {
   pause,
   updateState,
   logout,
+  setMute,
 };

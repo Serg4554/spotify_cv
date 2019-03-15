@@ -24,3 +24,39 @@
 .progressSymbol {
     display: none !important;
 }
+
+.mute {
+    position: absolute;
+    top: 7px;
+    left: 20px;
+    fill: white;
+    filter: invert(.8);
+    cursor: pointer;
+    transition: filter .2s, transform .2s;
+}
+
+.mute:hover {
+    filter: invert(1);
+}
+
+.mute img {
+    width: 35px;
+    height: 35px;
+}
+
+.highlightMute {
+    filter: invert(1) !important;
+    animation: shake .2s infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(-5px);
+    }
+}

@@ -6,7 +6,8 @@ import * as types from './types';
  *  error: string,
  *  ready: bool,
  *  text: string,
- *  playbackState: object
+ *  playbackState: object,
+ *  mute: bool
  * }
  */
 
@@ -16,6 +17,7 @@ const initState = {
   ready: false,
   text: '',
   playbackState: {},
+  mute: false,
 };
 
 const reducer = (state = initState, action) => {
@@ -48,6 +50,12 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         playbackState: action.payload.playbackState,
+      };
+
+    case types.SET_MUTE:
+      return {
+        ...state,
+        mute: action.payload.mute,
       };
 
     default:

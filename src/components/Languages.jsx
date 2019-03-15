@@ -7,7 +7,9 @@ import * as SpotifyOperations from '../state/ducks/spotify/operations';
 import Button from './common/button';
 import MusicalLanguages from './MusicalLanguages';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  mute: state.spotify.mute,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
@@ -26,12 +28,20 @@ class Languages extends React.Component {
   }
 
   componentWillMount() {
-    this.props.play('spotify:track:2K1zp0p7PVmrBUQu6evtfe', true);
+    if (!this.props.mute) {
+      this.props.play('spotify:track:2K1zp0p7PVmrBUQu6evtfe', true);
+    }
     this.props.setText('Capture the skills somewhere in Stockholm');
   }
 
   componentWillUnmount() {
     this.props.pause();
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (this.props.mute !== nextProps.mute && !nextProps.mute) {
+      this.props.play('spotify:track:2K1zp0p7PVmrBUQu6evtfe', true);
+    }
   }
 
   render() {

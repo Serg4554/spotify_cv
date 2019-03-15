@@ -9,7 +9,9 @@ import Modal from './common/modal';
 import Button from './common/button';
 import credentials from '../config/credentials';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  mute: state.spotify.mute,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
@@ -31,12 +33,20 @@ class Projects extends React.Component {
   }
 
   componentWillMount() {
-    this.props.play('spotify:track:79RUMZfMNMpqZnswovvTqv', true);
+    if (!this.props.mute) {
+      this.props.play('spotify:track:79RUMZfMNMpqZnswovvTqv', true);
+    }
     this.props.setText('Take a look at some of my projects');
   }
 
   componentWillUnmount() {
     this.props.pause();
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (this.props.mute !== nextProps.mute && !nextProps.mute) {
+      this.props.play('spotify:track:79RUMZfMNMpqZnswovvTqv', true);
+    }
   }
 
   render() {
@@ -110,7 +120,8 @@ class Projects extends React.Component {
             <div>Check out my <a href={credentials.resume} target="_blank" rel="noopener noreferrer">resume</a></div>
             <div>Check out my <a href={credentials.github} target="_blank" rel="noopener noreferrer">github</a><span
               className="codeOfThis">and the code of this :)</span></div>
-            <div>Check out my <a href={credentials.linkedin} target="_blank" rel="noopener noreferrer">linkedIn</a></div>
+            <div>Check out my <a href={credentials.linkedin} target="_blank" rel="noopener noreferrer">linkedIn</a>
+            </div>
           </div>
           <div className="call">Give me a call! +34 627 15 19 15</div>
         </div>

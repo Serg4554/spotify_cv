@@ -7,7 +7,9 @@ import * as SpotifyOperations from '../state/ducks/spotify/operations';
 import HangmanFigure from './HangmanFigure';
 import Button from './common/button';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  mute: state.spotify.mute,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   play: SpotifyOperations.play,
@@ -34,12 +36,20 @@ class Hangman extends React.Component {
     console.log('//      Ok ok... You win, the solution is: THE NIGHTS       //');
     console.log('//////////////////////////////////////////////////////////////');
 
-    this.props.play('spotify:track:0ct6r3EGTcMLPtrXHDvVjc', true);
+    if (!this.props.mute) {
+      this.props.play('spotify:track:0ct6r3EGTcMLPtrXHDvVjc', true);
+    }
     this.props.setText('What is the name of the song?');
   }
 
   componentWillUnmount() {
     this.props.pause();
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (this.props.mute !== nextProps.mute && !nextProps.mute) {
+      this.props.play('spotify:track:0ct6r3EGTcMLPtrXHDvVjc', true);
+    }
   }
 
   handleGuess(id, event) {
