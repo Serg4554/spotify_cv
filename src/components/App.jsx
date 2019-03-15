@@ -133,7 +133,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.error);
     return (
       <div>
         <Modal open={this.state.openMobileWarning} onClose={() => this.setState({openMobileWarning: false})}>
