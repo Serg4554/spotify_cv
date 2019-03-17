@@ -77,21 +77,6 @@
 }
 
 
-/* Text config */
-.text-size-huge {
-    font-size: 70pt;
-}
-
-.text-size-small {
-    font-size: 13pt;
-    font-weight: 200;
-}
-
-.text-center {
-    text-align: center;
-}
-
-
 /* Common */
 .no-display {
     display: none;
@@ -113,57 +98,70 @@
 
 
 /* Styles for: Home.jsx */
-.hv-center {
-    text-align: center;
-    position: absolute;
-    margin: 0;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-.animateHome {
-    transition: opacity 1s, transform 1s;
-}
-
-.animateHome.hv-center-hidden {
-    transform: translateY(-200px);
-    opacity: 0;
-}
-
 #welcomeMsg {
+    display: block;
+    position: relative;
     width: 100%;
     height: calc(100vh - 40px);
-    position: relative;
+    line-height: calc(100vh - 40px);
+    text-align: center;
+    margin: 0;
+    font-size: 70pt;
+    animation: fadeOutTop 1s 1.5s forwards;
+}
+
+@keyframes fadeOutTop {
+    from {opacity: 1;}
+    to {opacity: 0; transform: translateY(-200px);;}
+}
+
+#homeContainer {
+    display: none;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    font-size: 14pt;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 #helloMsg {
-    width: 970px;
+    display: block;
+    width: fit-content;
     margin: 0 auto;
+    font-size: 70pt;
 }
 
 #clarification {
     font-family: 'Handlee', cursive;
     text-align: right;
+    font-size: 15pt;
 }
 
 #me {
+    display: block;
     width: 400px;
     height: 400px;
     object-fit: cover;
-    margin: 30px;
+    margin: 30px auto;
 }
 
 #login {
-    margin-top: 10px;
+    display: block;
+    margin: 10px auto;
+    width: fit-content;
 }
 
 #continueWithoutLogin {
-    margin-top: 5px;
+    display: block;
+    margin: 5px auto;
+    width: fit-content;
     color: #bfbfbf;
     text-decoration: none;
     cursor: pointer;
+    font-size: 14pt;
 }
 
 #continueWithoutLogin:hover {
@@ -173,17 +171,19 @@
 #premiumRequired {
     position: absolute;
     margin-top: -30px;
-    left: calc(50% + 150px);
-    width: 200px;
+    left: calc(50% + 180px);
+    width: 230px;
+    font-size: 14pt;
 }
 
 #premiumRequired #arrow {
     width: 50px;
-    transform: rotate(190deg) translateX(70px) translateY(-10px);
+    transform: rotate(195deg) translateX(30px) translateY(-0px);
 }
 
 #tip {
     margin-top: 20px;
+    text-align: center;
 }
 
 #goToResume {

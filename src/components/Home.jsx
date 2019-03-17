@@ -34,18 +34,9 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.timeouts.push(setTimeout(() => {
-      this.welcomeMsg.classList.add('animateHome');
-    }, 500));
-    this.timeouts.push(setTimeout(() => {
-      this.welcomeMsg.classList.add('hv-center-hidden');
-    }, 1500));
-    this.timeouts.push(setTimeout(() => {
-      this.welcomeMsg.classList.add('no-display');
-      this.content.classList.remove('no-display');
+      document.getElementById('welcomeMsg').style.display = "none";
+      document.getElementById('homeContainer').style.display = "block";
     }, 2500));
-    this.timeouts.push(setTimeout(() => {
-      this.content.classList.remove('transparent');
-    }, 2600));
   }
 
   renderContinueWithoutLogin() {
@@ -63,12 +54,10 @@ class Home extends React.Component {
 
     return (
       <div>
-        <div ref={obj => this.welcomeMsg = obj} id="welcomeMsg">
-          <h1 className="hv-center text-size-huge">This is me</h1>
-        </div>
+        <h1 id="welcomeMsg">This is me</h1>
 
-        <div ref={obj => this.content = obj} className="text-center animateHome no-display transparent">
-          <h1 id="helloMsg" className="text-size-huge">
+        <div id="homeContainer" className="mainContainer">
+          <h1 id="helloMsg">
             <div>Hello <span className="highlight-color">Spotify</span>, I'm Serg</div>
             <div id="clarification" className="text-size-small">(Well... officially Sergio)</div>
           </h1>
