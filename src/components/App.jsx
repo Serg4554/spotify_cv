@@ -5,7 +5,6 @@ import {retrieveSession} from '../state/ducks/session/operations';
 import * as SpotifyOperations from '../state/ducks/spotify/operations';
 import {Route, Switch} from 'react-router-dom';
 import {push} from 'connected-react-router';
-import {isMobile} from 'react-device-detect';
 
 import '../styles/app.css';
 import SnackBar from 'react-material-snackbar';
@@ -41,14 +40,22 @@ class App extends Component {
     super(props);
 
     this.state = {
-      openMobileWarning: isMobile,
+      isMobile: window.innerWidth < 1040,
     };
   }
 
   componentWillMount() {
     this.props.retrieveSession();
     this.props.loadSpotify();
+    this.updateWidth();
+    window.addEventListener('resize', this.updateWidth.bind(this));
   }
+
+  updateWidth() {
+    this.setState({
+      isMobile: window.innerWidth < 1040,
+    });
+  };
 
   isPlayerVisible() {
     return this.props.location !== '/' && this.props.location !== '/welcome';
@@ -58,19 +65,17 @@ class App extends Component {
     switch (this.props.error) {
       case 'Initialization failed':
         return (
-          <p style={{margin: '0'}}>
-            Ops! We couldn't initialize the music player <span role="img" aria-label="ops">😖</span>
-            <br/>
-            Make sure the address starts with https:// or try to use another browser
-          </p>
+          <div>
+            <p>Ops! We couldn't initialize the music player <span role="img" aria-label="ops">😖</span></p>
+            <p>Make sure the address starts with https:// or try to use another browser</p>
+          </div>
         );
       case 'Account validation failed':
         return (
-          <p style={{margin: '0'}}>
-            You need Spotify Premium to listed the music <span role="img" aria-label="ups">😅</span>
-            <br/>
-            But don't worry, you can continue without music! <span role="img" aria-label=":D">😁</span>
-          </p>
+          <div>
+            <p>You need Spotify Premium to listed the music <span role="img" aria-label="ups">😅</span></p>
+            <p>But don't worry, you can continue without music! <span role="img" aria-label=":D">😁</span></p>
+          </div>
         );
       default:
         return '';
@@ -79,14 +84,14 @@ class App extends Component {
 
   renderSnackBar() {
     let snackbar;
-    if (this.props.loading) {
+    if (!this.state.isMobile && this.props.loading) {
       snackbar = (
         <SnackBar show={true}>
           <ReactLoading type="bars" height={30} width={30}/>
           <span style={{marginLeft: '10px'}}>Connecting to Spotify</span>
         </SnackBar>
       );
-    } else if (this.isPlayerVisible() && (!this.props.ready || this.props.error)) {
+    } else if (!this.state.isMobile && this.isPlayerVisible() && (!this.props.ready || this.props.error)) {
       snackbar = (
         <SnackBar show={true}>
           <div style={{textAlign: 'center'}}>
@@ -96,7 +101,7 @@ class App extends Component {
           <Button
             style={{marginLeft: '10px'}}
             size="medium"
-            onClick={() => window.location.href = credentials.getAuthUri(this.props.uuid, true)}
+            onClick={() => window.location.href = credentials.getAuthUri(this.props.uuid)}
           >
             Login
           </Button>
@@ -124,7 +129,7 @@ class App extends Component {
       <Modal
         open={!!this.getErrorMessage()}
         onClose={() => this.props.logoutSpotify()}
-        style={{maxWidth: '600px', textAlign: 'center'}}
+        classNames={{modal: 'errorMessage'}}
       >
         {this.getErrorMessage()}
         <Button style={{textAlign: 'center', marginTop: '10px'}} onClick={() => this.props.logoutSpotify()}>OK</Button>
@@ -135,17 +140,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Modal open={this.state.openMobileWarning} onClose={() => this.setState({openMobileWarning: false})}>
-          <div className="mobileDialogTitle">Please visit this website from a computer!</div>
-          <div className="mobileDialogContent">This application has functions that are only available in modern desktop
-            browsers, such as the Spotify Web Player.
-          </div>
-          <div className="mobileDialogContent">So it has not been adapted for mobile use.</div>
-          <Button className="mobileDialogButton" size="large" onClick={() => this.setState({openMobileWarning: false})}>
-            Continue anyway
-          </Button>
-        </Modal>
-
         <div className={this.isPlayerVisible() ? 'playerContainer' : 'container'}>
           {this.renderSnackBar()}
           {this.renderErrorWarning()}

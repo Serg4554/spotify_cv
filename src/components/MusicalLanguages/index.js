@@ -6,34 +6,64 @@ class MusicalLanguages extends React.Component {
   constructor(props) {
     super(props);
 
+    this.langs = ['JavaScript', 'C/C++', 'Qt', 'MySQL', 'Java', 'C#', 'SQLite',
+      'Loopback', 'React', 'MongoDB', 'Node.js', 'UML', 'PHP', 'HTML + CSS',
+      'MVP', 'Express.js', 'Redux', 'Haskell', 'MVC', 'REST APIs'];
+
+    let langsPlaying = [];
+    this.langs.forEach((lang) => {
+      langsPlaying.push({content: lang, left: 0, top: 0});
+    });
+
     this.state = {
-      langPlaying: [],
-      langCaptured: [],
+      langsPlaying,
+      langsCaptured: [],
       finished: false,
+      width: window.innerWidth,
+      isMobile: window.innerWidth < 1040,
     };
   }
 
   componentWillMount() {
-    const langs = ['JavaScript', 'C/C++', 'Qt', 'MySQL', 'Java', 'C#', 'SQLite',
-      'Loopback', 'React', 'MongoDB', 'Node.js', 'UML', 'PHP', 'HTML + CSS',
-      'MVP', 'Express.js', 'Redux', 'Haskell', 'MVC', 'REST APIs'];
+    this.updateWidth();
+    window.addEventListener('resize', this.updateWidth.bind(this));
+  }
 
-    let langPlaying = [];
-    langs.forEach((lang, i) => {
-      const left = (i * 200) % 800;
-      const height = parseInt(i / 4);
-      const top = (height * 116) % 580;
-
-      langPlaying.push({content: lang, left, top});
+  updateWidth() {
+    this.setState({
+      width: window.innerWidth,
+      isMobile: window.innerWidth < 1040,
     });
-    this.setState({langPlaying});
+    this.updateLangsPosition();
+  }
+
+  updateLangsPosition() {
+    this.langs.forEach((langName, i) => {
+
+      let langsPlaying = this.state.langsPlaying;
+      let lang = langsPlaying.find(lang => lang.content === langName);
+      if (lang) {
+        if (this.state.isMobile) {
+          console.log('a');
+          const width = this.state.width;
+          lang.left = (i * width * .33 + 1) % (width * .66);
+          const height = parseInt(i / 2);
+          lang.top = (height * width * .104) % (width * .104 * 10);
+        } else {
+          lang.left = (i * 200) % 800;
+          const height = parseInt(i / 4);
+          lang.top = (height * 116) % 580;
+        }
+        this.setState({langsPlaying});
+      }
+    });
   }
 
   renderArena() {
     if (!this.state.finished) {
       return (
         <div className={style.langArena}>
-          {this.state.langPlaying.map(lang => (
+          {this.state.langsPlaying.map(lang => (
             <div
               id={lang.content}
               key={lang.content}
@@ -43,17 +73,17 @@ class MusicalLanguages extends React.Component {
                 top: lang.top + 'px',
               }}
               onClick={() => {
-                let langPlaying = this.state.langPlaying;
-                let langCaptured = this.state.langCaptured;
+                let langsPlaying = this.state.langsPlaying;
+                let langsCaptured = this.state.langsCaptured;
 
-                const index = langPlaying.findIndex(l => l.content === lang.content);
+                const index = langsPlaying.findIndex(l => l.content === lang.content);
                 if (index !== -1) {
-                  langPlaying.splice(index, 1);
+                  langsPlaying.splice(index, 1);
                 }
-                langCaptured.push(lang);
-                this.setState({langPlaying, langCaptured});
+                langsCaptured.push(lang);
+                this.setState({langsPlaying, langsCaptured});
 
-                if (langPlaying.length === 0) {
+                if (langsPlaying.length === 0) {
                   this.setState({finished: true});
                   if (this.props.onFinished) {
                     this.props.onFinished();
@@ -86,7 +116,7 @@ class MusicalLanguages extends React.Component {
     return (
       <div className={style.frame}>
         <div className={style.langList}>
-          {this.state.langCaptured.map(lang => (
+          {this.state.langsCaptured.map(lang => (
             <div key={lang.content} className={style.langElement}>{lang.content}</div>
           ))}
         </div>

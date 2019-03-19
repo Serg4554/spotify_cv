@@ -34,8 +34,8 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.timeouts.push(setTimeout(() => {
-      document.getElementById('welcomeMsg').style.display = "none";
-      document.getElementById('homeContainer').style.display = "block";
+      document.getElementById('welcomeMsg').style.display = 'none';
+      document.getElementById('homeContainer').style.display = 'block';
     }, 2500));
   }
 
@@ -43,7 +43,7 @@ class Home extends React.Component {
     if (this.props.loading || !this.props.ready || this.props.error) {
       return (
         <div id="continueWithoutLogin" onClick={() => this.props.goToUrl('/welcome')}>
-          Continue without music
+          Continue without login
         </div>
       );
     }
@@ -85,11 +85,11 @@ class Home extends React.Component {
           <div id="tip" className="text-size-small">Tip: Turn up the volume or improve your
             extrasensory powers <span role="img" aria-label="wink">😉</span>
           </div>
-        </div>
 
-        <a id="goToResume" href={credentials.resume} target="_blank" rel="noopener noreferrer">
-          Go directly to my resume
-        </a>
+          <a id="goToResume" href={credentials.resume} target="_blank" rel="noopener noreferrer">
+            Go directly to my resume
+          </a>
+        </div>
       </div>
     );
   }

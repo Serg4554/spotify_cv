@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import * as SpotifyOperations from '../state/ducks/spotify/operations';
+import {isMobile} from 'react-device-detect';
 
 import HangmanFigure from './HangmanFigure';
 import Button from './common/button';
@@ -192,7 +193,7 @@ class Hangman extends React.Component {
             type="text"
             value={this.state.guess[2]}
             onChange={(e) => this.handleGuess(2, e)}/>
-          <div style={{display: 'inline-block', width: '70px'}}/>
+          <div className="hangmanLetterSpace"/>
           <input
             ref={obj => this.letters[3] = obj}
             className="hangmanLetter"
@@ -231,7 +232,10 @@ class Hangman extends React.Component {
             onChange={(e) => this.handleGuess(8, e)}/>
         </div>
         <div id="hangmanLettersCaption">
-          The answer is visible somewhere, will you be able to find it? <span role="img" aria-label=";)">😏</span>
+          Type the right letter in the right position. The answer is visible somewhere, will you be able to
+          find it? <span role="img" aria-label=";)">😏</span>
+          <br/>
+          <span style={{color: 'transparent'}}>{isMobile ? 'THE NIGHTS' : 'Look at the console'}</span>
         </div>
 
         <div className="continueButtonContainer">

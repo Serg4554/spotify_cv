@@ -4,6 +4,8 @@ import style from './style.module.css';
 
 import {Progress} from 'react-sweet-progress';
 import 'react-sweet-progress/lib/style.css';
+import ReactLoading from 'react-loading';
+import credentials from '../../config/credentials';
 
 class Player extends React.Component {
   constructor(props) {
@@ -12,6 +14,8 @@ class Player extends React.Component {
     this.state = {
       position: 0,
       intervalId: undefined,
+      width: window.innerWidth,
+      isMobile: window.innerWidth < 1040,
     };
   }
 
@@ -26,6 +30,8 @@ class Player extends React.Component {
       visibilityChange = 'webkitvisibilitychange';
     }
     document.addEventListener(visibilityChange, this.props.updateState.bind(this), false);
+    this.updateWidth();
+    window.addEventListener('resize', this.updateWidth.bind(this));
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -52,6 +58,13 @@ class Player extends React.Component {
       }
     }
   }
+
+  updateWidth() {
+    this.setState({
+      width: window.innerWidth,
+      isMobile: window.innerWidth < 1040,
+    });
+  };
 
   startInterval() {
     if (this.state.intervalId) {
@@ -82,6 +95,19 @@ class Player extends React.Component {
     this.setState({intervalId: undefined});
   }
 
+  renderPlayerControlImage() {
+    if (this.props.loading) {
+      const size = this.state.isMobile ? '6vw' : 30;
+      return <ReactLoading type="bars" height={size} width={size} color="#000"/>;
+    } else if (!this.props.ready || !!this.props.error) {
+      return <img src='/assets/error.svg' alt="mute"/>;
+    } else if (this.props.loading) {
+      return <img src='/assets/music_off.svg' alt="mute"/>;
+    } else {
+      return <img src='/assets/music_on.svg' alt="mute"/>;
+    }
+  }
+
   render() {
     const {text, visible, mute} = this.props;
 
@@ -90,11 +116,17 @@ class Player extends React.Component {
         <div
           ref={obj => this.muteElement = obj}
           className={style.mute}
-          onClick={() => this.props.setMute(!mute)}
+          onClick={() => {
+            if (!this.props.loading && this.props.ready && !this.props.error) {
+              this.props.setMute(!mute);
+            } else {
+              window.location.href = credentials.getAuthUri(this.props.uuid);
+            }
+          }}
         >
-          <img id="arrow" src={'/assets/music_' + (mute ? 'off' : 'on') + '.svg'} alt="arrow"/>
+          {this.renderPlayerControlImage()}
         </div>
-        <div className={style.text}>{text}</div>
+        <div className={style.text}><span>{text}</span></div>
         <Progress
           theme={{
             default: {
@@ -103,9 +135,11 @@ class Player extends React.Component {
               trailColor: '#444',
             },
           }}
+          type={this.state.isMobile ? 'circle' : ''}
+          width={this.state.isMobile ? this.state.width * .162 : undefined}
+          strokeWidth={this.state.isMobile ? this.state.width * .02 : 1}
           percent={this.state.position}
           status="default"
-          strokeWidth={1}
           className={style.progress}
           symbolClassName={style.progressSymbol}
         />

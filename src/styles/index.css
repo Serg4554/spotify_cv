@@ -44,4 +44,11 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#412d4e', endColorstr='#000000', GradientType=1);
     color: white;
     background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media only screen and (max-width: 1040px) {
+    body {
+        background: #30213a;
+    }
 }

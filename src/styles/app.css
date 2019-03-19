@@ -33,6 +33,7 @@
     cursor: pointer;
     transition: background-color .2s, top .2s, right .2s, clip-path .2s;
     clip-path: polygon(50% 64%, 14% 100%, 86% 100%);
+    z-index: 1;
 }
 
 #githubContainer:hover {
@@ -96,6 +97,15 @@
     margin: 0 10px;
 }
 
+.errorMessage {
+    max-width: 600px;
+    text-align: center;
+}
+
+.errorMessage p {
+    margin: 0;
+}
+
 
 /* Styles for: Home.jsx */
 #welcomeMsg {
@@ -111,8 +121,13 @@
 }
 
 @keyframes fadeOutTop {
-    from {opacity: 1;}
-    to {opacity: 0; transform: translateY(-200px);;}
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-200px);;
+    }
 }
 
 #homeContainer {
@@ -123,8 +138,12 @@
 }
 
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 #helloMsg {
@@ -353,6 +372,11 @@
     border-bottom: 5px solid #1ed760;
 }
 
+.hangmanLetterSpace {
+    display: inline-block;
+    width: 70px;
+}
+
 #hangmanLettersCaption {
     font-family: 'Handlee', cursive;
     text-align: center;
@@ -361,14 +385,14 @@
 }
 
 
-/* Styles for: Hangman.jsx */
+/* Styles for: Languages.jsx */
 #headerText {
     width: 850px;
     margin: 0 auto;
 }
 
 
-/* Styles for: Hangman.jsx */
+/* Styles for: Projects.jsx */
 #projectsInitDialog {
     font-size: 16pt;
 }
@@ -407,7 +431,6 @@
 #projects .prjImage {
     width: 100%;
     border-radius: 5px;
-    font-size: 15pt;
 }
 
 #projects .prjTitle {
@@ -442,7 +465,6 @@
 #projects .infoBtn {
     position: absolute;
     width: fit-content;
-    padding: 5px 10px;
     margin: 0 auto;
     top: 50%;
     left: 50%;
@@ -527,4 +549,361 @@
     color: black;
     text-align: center;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 1040px) {
+    .container {
+        min-width: unset;
+    }
+
+    .playerContainer {
+        min-width: unset;
+        padding: 2vw;
+        position: relative;
+        height: unset;
+        overflow-x: unset;
+        overflow-y: unset;
+        margin-bottom: 20vw;
+    }
+
+
+    /* Common */
+    .continueButtonContainer {
+        text-align: center;
+        margin-bottom: unset;
+    }
+
+    .continueButton {
+        margin: 1vw;
+        display: block;
+    }
+
+    .errorMessage {
+        font-size: 6vw;
+    }
+
+    .errorMessage p {
+        margin: 6vw 0;
+    }
+
+
+    /* Styles for: Home.jsx */
+    #welcomeMsg {
+        font-size: 15vw;
+    }
+
+    #helloMsg {
+        font-size: 13vw;
+        text-align: center;
+    }
+
+    #clarification {
+        text-align: center;
+        font-size: 4vw;
+    }
+
+    #me {
+        width: 80vw;
+        height: 80vw;
+        margin: 30px auto;
+    }
+
+    #login {
+        margin: -6vw auto 10px auto;
+    }
+
+    #continueWithoutLogin {
+        margin: 1vw auto;
+        font-size: 4vw;
+    }
+
+    #premiumRequired {
+        position: relative;
+        margin: 0 auto;
+        transform: translateX(-7vw);
+        left: unset;
+        width: 65vw;
+        font-size: 5vw;
+    }
+
+    #premiumRequired #arrow {
+        width: 10vw;
+        height: 10vw;
+        transform: rotate(90deg) translateX(-6vw) translateY(-62vw);
+    }
+
+    #tip {
+        font-size: 4vw;
+        margin-top: 15vw;
+    }
+
+    #goToResume {
+        display: block;
+        position: unset;
+        text-align: center;
+        width: calc(100% + 40px);
+        margin: 10vh 0 -20px -20px;
+        padding: 20px 0;
+        border-top: 1px solid black;
+        background: #222;
+        bottom: 0;
+        font-size: 4vw;
+    }
+
+    #goToResume:hover {
+        text-decoration: none;
+        background: #333;
+    }
+
+
+    /* Styles for: Welcome.jsx */
+    #welcomeInfoContainer {
+        width: 100%;
+    }
+
+    #welcomeImg {
+        display: block;
+        width: 80vw;
+        height: 80vw;
+        margin: 30px auto;
+        background-image: url("/images/img_2.png");
+        background-size: 160vw 80vw;
+        background-position: 80vw;
+    }
+
+    #welcomeImg:hover {
+        background-position: 80vw;
+    }
+
+    #welcomeImg figcaption {
+        display: none;
+    }
+
+    #welcomeInfoContainer #imgText {
+        display: block;
+        font-size: 5vw;
+        width: unset;
+        text-align: center;
+    }
+
+    #welcomeInfoContainer #imgText #p1 {
+        margin: 10vw 0 0 0;
+    }
+
+    #welcomeInfoContainer #imgText #p2 {
+        margin: 10vw 0 0 0;
+        padding: 0 1.5vw;
+    }
+
+    #welcomeInfoContainer #motivation {
+        text-align: center;
+        color: #ccc;
+        margin: 30vw 0;
+        font-size: 5vw;
+    }
+
+    #adventure #play {
+        display: block;
+        margin: 0 auto;
+        width: 40vw;
+        height: 40vw;
+        background-position: 14vw 5vw;
+        background-size: 15vw 30vw;
+        border-radius: 20vw;
+    }
+
+    #adventure {
+        font-size: 5vw;
+        text-align: center;
+        margin-bottom: 4vw;
+    }
+
+    #adventure p {
+        margin-top: 4vw !important;
+    }
+
+    #adventure #song {
+        font-size: 5vw;
+        margin: 4vw 0 0 -5vw;
+    }
+
+
+    /* Styles for: Hangman.jsx */
+    #hangmanImg {
+        display: block;
+        width: 80vw;
+        height: 80vw;
+        margin: 30px auto;
+        background-image: url("/images/img_3.jpeg");
+        background-size: 80vw 80vw;
+        background-position: 0;
+        vertical-align: unset;
+        object-fit: unset;
+    }
+
+    #hangmanImg figcaption {
+        font-family: 'Handlee', cursive;
+        font-size: 4vw;
+        margin-top: 81vw;
+    }
+
+    #hangmanInfoContainer #imgText {
+        display: block;
+        font-size: 5vw;
+        width: unset;
+        text-align: center;
+        vertical-align: unset;
+    }
+
+    #hangmanInfoContainer #imgText #p1 {
+        margin: 15vw 0 0 0;
+    }
+
+    #hangmanInfoContainer #imgText #p2 {
+        margin: 10vw 0 0 0;
+    }
+
+    #hangmanInfoContainer #hangmanFigure {
+        display: block;
+        vertical-align: unset;
+        margin: 5vw auto;
+    }
+
+    .hangmanLetters {
+        margin-top: 2vw;
+        text-align: center;
+    }
+
+    .hangmanLetter {
+        width: 6vw;
+        height: 7vw;
+        border-bottom: .5vw solid white;
+        margin: 0 1.5vw;
+        font-size: 8vw;
+    }
+
+    .hangmanLetter:focus {
+        border-bottom: .5vw solid #1ed760;
+    }
+
+    .hangmanLetterSpace {
+        display: inline-block;
+        width: 6vw;
+    }
+
+    #hangmanLettersCaption {
+        font-size: 4vw;
+        margin: 1vw 0;
+    }
+
+
+    /* Styles for: Languages.jsx */
+    #headerText {
+        width: calc(100% - 4vw);
+        margin: 5vw auto 7vw auto;
+        text-align: center;
+        font-size: 5vw;
+    }
+
+
+    /* Styles for: Projects.jsx */
+    #projectsInitDialog {
+        font-size: 4vw;
+    }
+
+    #projectsInitDialog #title {
+        font-size: 6vw;
+        margin-bottom: 4vw;
+    }
+
+    #projectsInitDialog #findOut {
+        margin-top: 4vw;
+    }
+
+    #projects .section {
+        margin-bottom: 10vw;
+    }
+
+    #projects .title {
+        font-size: 15vw;
+    }
+
+    #projects .prjImageFrame {
+        width: 30vw;
+        margin: 3vw;
+    }
+
+    #projects .prjTitle {
+        position: absolute;
+        font-size: 3vw;
+    }
+
+    #projects .prjOverlay {
+        font-size: 3vw;
+    }
+
+    #projects .infoBtn {
+        text-shadow: 0 0 2vw black;
+    }
+
+    #projectDialog {
+        min-width: unset;
+    }
+
+    #projectDialog .projectDialogImage {
+        display: block;
+        width: 40vw;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+
+    #projectDialog .projectDialogContent {
+        display: block;
+        width: unset;
+        margin: 0 2vw;
+    }
+
+    #projectDialog .projectDialogTitle {
+        text-align: center;
+        font-size: 7vw;
+    }
+
+    #projectDialog .projectDialogDescription {
+        font-size: 4vw;
+    }
+
+    #projectDialog #close {
+        text-align: center;
+        margin-top: 4vw;
+    }
+
+    #whatIsNext {
+        background: #1ed760;
+        width: calc(100% + 4vw);
+        margin: 0 0 -2vw -2vw;
+    }
+
+    #whatIsNext .title {
+        font-size: 15vw;
+    }
+
+    #whatIsNext .onlyYouDecide {
+        font-size: 7vw;
+        margin-top: -2vw;
+    }
+
+    #whatIsNext .content {
+        padding: 2vw 0;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    #whatIsNext .codeOfThis {
+        display: none;
+    }
+
+    #whatIsNext .call {
+        padding-top: 2vw;
+        font-size: 7vw;
+    }
 }

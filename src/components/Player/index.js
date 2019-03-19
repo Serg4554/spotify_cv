@@ -5,10 +5,14 @@ import * as SpotifyOperations from '../../state/ducks/spotify/operations';
 
 const mapStateToProps = state => {
   return {
+    loading: state.spotify.loading,
+    ready: state.spotify.ready,
+    error: state.spotify.error,
     location: state.router.location.pathname,
     playbackState: state.spotify.playbackState,
     text: state.spotify.text,
     mute: state.spotify.mute,
+    uuid: state.session.uuid,
   };
 };
 

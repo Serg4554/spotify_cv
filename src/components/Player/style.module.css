@@ -27,7 +27,7 @@
 
 .mute {
     position: absolute;
-    top: 7px;
+    top: 10px;
     left: 20px;
     fill: white;
     filter: invert(.8);
@@ -58,5 +58,48 @@
     }
     100% {
         transform: translateX(-5px);
+    }
+}
+
+
+@media only screen and (max-width: 1040px) {
+    .player {
+        height: 20vw;
+    }
+
+    .text {
+        position: absolute;
+        margin: 0;
+        font-size: 5vw;
+        left: 20.5vw;
+        text-align: left;
+        width: 77vw;
+        display: table;
+        height: 100%;
+    }
+
+    .text span {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .player svg {
+        position: absolute;
+        display: block;
+        width: unset;
+        top: 2vw;
+        left: 2vw;
+    }
+
+    .mute {
+        position: absolute;
+        top: 5vw;
+        left: 5vw;
+        z-index: 1;
+    }
+
+    .mute img {
+        width: 10vw;
+        height: 10vw;
     }
 }
