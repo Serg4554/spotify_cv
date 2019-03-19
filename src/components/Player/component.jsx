@@ -101,7 +101,7 @@ class Player extends React.Component {
       return <ReactLoading type="bars" height={size} width={size} color="#000"/>;
     } else if (!this.props.ready || !!this.props.error) {
       return <img src='/assets/error.svg' alt="mute"/>;
-    } else if (this.props.loading) {
+    } else if (this.props.mute) {
       return <img src='/assets/music_off.svg' alt="mute"/>;
     } else {
       return <img src='/assets/music_on.svg' alt="mute"/>;
